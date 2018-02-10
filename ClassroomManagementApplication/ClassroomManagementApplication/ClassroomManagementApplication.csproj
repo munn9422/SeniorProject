@@ -231,11 +231,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Student.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Student1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Student.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Teacher.cs">
       <DependentUpon>Student.tt</DependentUpon>
     </Compile>

@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ClassroomManagementTestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BehaviorPerformed">
+    <Key>
+      <PropertyRef Name="BPID" />
+    </Key>
+    <Property Name="BPID" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+    <Property Name="BP_Date" Type="DateTime" Precision="7" />
+    <Property Name="behaviorID" Type="Decimal" Precision="8" Scale="0" />
+    <Property Name="studentID" Type="Decimal" Precision="8" Scale="0" />
+    <NavigationProperty Name="BehaviorType" Relationship="Self.FK__BehaviorP__behav__6EF57B66" FromRole="BehaviorPerformed" ToRole="BehaviorType" />
+    <NavigationProperty Name="Student" Relationship="Self.FK__BehaviorP__stude__6FE99F9F" FromRole="BehaviorPerformed" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="BehaviorType">
+    <Key>
+      <PropertyRef Name="behaviorID" />
+    </Key>
+    <Property Name="behaviorID" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+    <Property Name="behaviorTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="behaviorDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="pointValue" Type="Decimal" Precision="10" Scale="0" />
+    <Property Name="classID" Type="Decimal" Precision="10" Scale="0" />
+    <NavigationProperty Name="BehaviorPerformeds" Relationship="Self.FK__BehaviorP__behav__6EF57B66" FromRole="BehaviorType" ToRole="BehaviorPerformed" />
+    <NavigationProperty Name="Classroom" Relationship="Self.FK__BehaviorT__class__6D0D32F4" FromRole="BehaviorType" ToRole="Classroom" />
+  </EntityType>
+  <EntityType Name="Classroom">
+    <Key>
+      <PropertyRef Name="classID" />
+    </Key>
+    <Property Name="classID" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="semesterStart" Type="DateTime" Precision="0" />
+    <Property Name="semesterEnd" Type="DateTime" Precision="0" />
+    <Property Name="teacherID" Type="Decimal" Precision="8" Scale="0" />
+    <NavigationProperty Name="BehaviorTypes" Relationship="Self.FK__BehaviorT__class__6D0D32F4" FromRole="Classroom" ToRole="BehaviorType" />
+    <NavigationProperty Name="Teacher" Relationship="Self.FK__Class__teacherID__5DCAEF64" FromRole="Classroom" ToRole="Teacher" />
+    <NavigationProperty Name="Students" Relationship="Self.FK__Student__classID__619B8048" FromRole="Classroom" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Parent">
+    <Key>
+      <PropertyRef Name="parentID" />
+    </Key>
+    <Property Name="parentUsername" Type="Decimal" Precision="10" Scale="0" />
+    <Property Name="parentFirst" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="parentID" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+    <NavigationProperty Name="Students" Relationship="Self.FK__Student__parentI__60A75C0F" FromRole="Parent" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Prize">
+    <Key>
+      <PropertyRef Name="prizeID" />
+    </Key>
+    <Property Name="prizeID" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+    <Property Name="prizeName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="prizeCost" Type="Decimal" Precision="10" Scale="0" />
+    <Property Name="prizeDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PrizeRequests" Relationship="Self.FK__PrizeRequ__prize__6A30C649" FromRole="Prize" ToRole="PrizeRequest" />
+  </EntityType>
+  <EntityType Name="PrizeRequest">
+    <Key>
+      <PropertyRef Name="requestID" />
+    </Key>
+    <Property Name="requestID" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+    <Property Name="dateRequested" Type="DateTime" Precision="0" />
+    <Property Name="datefulfilled" Type="DateTime" Precision="0" />
+    <Property Name="studentID" Type="Decimal" Precision="8" Scale="0" />
+    <Property Name="prizeID" Type="Decimal" Precision="8" Scale="0" />
+    <NavigationProperty Name="Prize" Relationship="Self.FK__PrizeRequ__prize__6A30C649" FromRole="PrizeRequest" ToRole="Prize" />
+    <NavigationProperty Name="Student" Relationship="Self.FK__PrizeRequ__stude__6754599E" FromRole="PrizeRequest" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+    <Property Name="studentUsername" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="studentFirst" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="pword_hashed" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="totalPoints" Type="Decimal" Precision="10" Scale="0" />
+    <Property Name="parentID" Type="Decimal" Precision="8" Scale="0" />
+    <Property Name="classID" Type="Decimal" Precision="10" Scale="0" />
+    <NavigationProperty Name="BehaviorPerformeds" Relationship="Self.FK__BehaviorP__stude__6FE99F9F" FromRole="Student" ToRole="BehaviorPerformed" />
+    <NavigationProperty Name="Classroom" Relationship="Self.FK__Student__classID__619B8048" FromRole="Student" ToRole="Classroom" />
+    <NavigationProperty Name="Parent" Relationship="Self.FK__Student__parentI__60A75C0F" FromRole="Student" ToRole="Parent" />
+    <NavigationProperty Name="PrizeRequests" Relationship="Self.FK__PrizeRequ__stude__6754599E" FromRole="Student" ToRole="PrizeRequest" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="TeacherID" />
+    </Key>
+    <Property Name="TeacherID" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+    <Property Name="teacherUsername" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="teacherFirst" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="teacherLast" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="title" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="pword_hashed" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Classrooms" Relationship="Self.FK__Class__teacherID__5DCAEF64" FromRole="Teacher" ToRole="Classroom" />
+  </EntityType>
+  <Association Name="FK__BehaviorP__behav__6EF57B66">
+    <End Role="BehaviorType" Type="Self.BehaviorType" Multiplicity="0..1" />
+    <End Role="BehaviorPerformed" Type="Self.BehaviorPerformed" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BehaviorType">
+        <PropertyRef Name="behaviorID" />
+      </Principal>
+      <Dependent Role="BehaviorPerformed">
+        <PropertyRef Name="behaviorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BehaviorP__stude__6FE99F9F">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="BehaviorPerformed" Type="Self.BehaviorPerformed" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="BehaviorPerformed">
+        <PropertyRef Name="studentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BehaviorT__class__6D0D32F4">
+    <End Role="Classroom" Type="Self.Classroom" Multiplicity="0..1" />
+    <End Role="BehaviorType" Type="Self.BehaviorType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classroom">
+        <PropertyRef Name="classID" />
+      </Principal>
+      <Dependent Role="BehaviorType">
+        <PropertyRef Name="classID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Class__teacherID__5DCAEF64">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="Classroom" Type="Self.Classroom" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="TeacherID" />
+      </Principal>
+      <Dependent Role="Classroom">
+        <PropertyRef Name="teacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Student__classID__619B8048">
+    <End Role="Classroom" Type="Self.Classroom" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classroom">
+        <PropertyRef Name="classID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="classID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Student__parentI__60A75C0F">
+    <End Role="Parent" Type="Self.Parent" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Parent">
+        <PropertyRef Name="parentID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="parentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PrizeRequ__prize__6A30C649">
+    <End Role="Prize" Type="Self.Prize" Multiplicity="0..1" />
+    <End Role="PrizeRequest" Type="Self.PrizeRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prize">
+        <PropertyRef Name="prizeID" />
+      </Principal>
+      <Dependent Role="PrizeRequest">
+        <PropertyRef Name="prizeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PrizeRequ__stude__6754599E">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="PrizeRequest" Type="Self.PrizeRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="PrizeRequest">
+        <PropertyRef Name="studentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ClassroomManagementTestEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BehaviorPerformeds" EntityType="Self.BehaviorPerformed" />
+    <EntitySet Name="BehaviorTypes" EntityType="Self.BehaviorType" />
+    <EntitySet Name="Classrooms" EntityType="Self.Classroom" />
+    <EntitySet Name="Parents" EntityType="Self.Parent" />
+    <EntitySet Name="Prizes" EntityType="Self.Prize" />
+    <EntitySet Name="PrizeRequests" EntityType="Self.PrizeRequest" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <EntitySet Name="Teachers" EntityType="Self.Teacher" />
+    <AssociationSet Name="FK__BehaviorP__behav__6EF57B66" Association="Self.FK__BehaviorP__behav__6EF57B66">
+      <End Role="BehaviorType" EntitySet="BehaviorTypes" />
+      <End Role="BehaviorPerformed" EntitySet="BehaviorPerformeds" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BehaviorP__stude__6FE99F9F" Association="Self.FK__BehaviorP__stude__6FE99F9F">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="BehaviorPerformed" EntitySet="BehaviorPerformeds" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BehaviorT__class__6D0D32F4" Association="Self.FK__BehaviorT__class__6D0D32F4">
+      <End Role="Classroom" EntitySet="Classrooms" />
+      <End Role="BehaviorType" EntitySet="BehaviorTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Class__teacherID__5DCAEF64" Association="Self.FK__Class__teacherID__5DCAEF64">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="Classroom" EntitySet="Classrooms" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Student__classID__619B8048" Association="Self.FK__Student__classID__619B8048">
+      <End Role="Classroom" EntitySet="Classrooms" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Student__parentI__60A75C0F" Association="Self.FK__Student__parentI__60A75C0F">
+      <End Role="Parent" EntitySet="Parents" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PrizeRequ__prize__6A30C649" Association="Self.FK__PrizeRequ__prize__6A30C649">
+      <End Role="Prize" EntitySet="Prizes" />
+      <End Role="PrizeRequest" EntitySet="PrizeRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PrizeRequ__stude__6754599E" Association="Self.FK__PrizeRequ__stude__6754599E">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="PrizeRequest" EntitySet="PrizeRequests" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

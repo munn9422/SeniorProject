@@ -24,7 +24,6 @@ namespace ClassroomManagementApplication.Models
         public decimal StudentID { get; set; }
         public string studentUsername { get; set; }
         public string studentFirst { get; set; }
-        public string pword_hashed { get; set; }
         public Nullable<decimal> totalPoints { get; set; }
         public Nullable<decimal> parentID { get; set; }
         public Nullable<decimal> classID { get; set; }

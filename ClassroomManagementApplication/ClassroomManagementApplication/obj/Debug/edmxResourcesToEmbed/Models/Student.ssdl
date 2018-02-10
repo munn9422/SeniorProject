@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ClassroomManagementTestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BehaviorPerformed">
+    <Key>
+      <PropertyRef Name="BPID" />
+    </Key>
+    <Property Name="BPID" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+    <Property Name="BP_Date" Type="datetime2" Precision="7" />
+    <Property Name="behaviorID" Type="numeric" Precision="8" Scale="0" />
+    <Property Name="studentID" Type="numeric" Precision="8" Scale="0" />
+  </EntityType>
+  <EntityType Name="BehaviorType">
+    <Key>
+      <PropertyRef Name="behaviorID" />
+    </Key>
+    <Property Name="behaviorID" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+    <Property Name="behaviorTitle" Type="varchar" MaxLength="30" />
+    <Property Name="behaviorDescription" Type="varchar" MaxLength="250" />
+    <Property Name="pointValue" Type="numeric" Precision="10" Scale="0" />
+    <Property Name="classID" Type="numeric" Precision="10" Scale="0" />
+  </EntityType>
+  <EntityType Name="Classroom">
+    <Key>
+      <PropertyRef Name="classID" />
+    </Key>
+    <Property Name="classID" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="semesterStart" Type="date" />
+    <Property Name="semesterEnd" Type="date" />
+    <Property Name="teacherID" Type="numeric" Precision="8" Scale="0" />
+  </EntityType>
+  <EntityType Name="Parent">
+    <Key>
+      <PropertyRef Name="parentID" />
+    </Key>
+    <Property Name="parentUsername" Type="numeric" Precision="10" Scale="0" />
+    <Property Name="parentFirst" Type="varchar" MaxLength="20" />
+    <Property Name="parentID" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Prize">
+    <Key>
+      <PropertyRef Name="prizeID" />
+    </Key>
+    <Property Name="prizeID" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+    <Property Name="prizeName" Type="varchar" MaxLength="20" />
+    <Property Name="prizeCost" Type="numeric" Precision="10" Scale="0" />
+    <Property Name="prizeDescription" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="PrizeRequest">
+    <Key>
+      <PropertyRef Name="requestID" />
+    </Key>
+    <Property Name="requestID" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+    <Property Name="dateRequested" Type="date" />
+    <Property Name="datefulfilled" Type="date" />
+    <Property Name="studentID" Type="numeric" Precision="8" Scale="0" />
+    <Property Name="prizeID" Type="numeric" Precision="8" Scale="0" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+    <Property Name="studentUsername" Type="varchar" MaxLength="20" />
+    <Property Name="studentFirst" Type="varchar" MaxLength="20" />
+    <Property Name="pword_hashed" Type="varchar" MaxLength="30" />
+    <Property Name="totalPoints" Type="numeric" Precision="10" Scale="0" />
+    <Property Name="parentID" Type="numeric" Precision="8" Scale="0" />
+    <Property Name="classID" Type="numeric" Precision="10" Scale="0" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="TeacherID" />
+    </Key>
+    <Property Name="TeacherID" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+    <Property Name="teacherUsername" Type="varchar" MaxLength="20" />
+    <Property Name="teacherFirst" Type="varchar" MaxLength="20" />
+    <Property Name="teacherLast" Type="varchar" MaxLength="20" />
+    <Property Name="title" Type="varchar" MaxLength="3" />
+    <Property Name="pword_hashed" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <Association Name="FK__BehaviorP__behav__6EF57B66">
+    <End Role="BehaviorType" Type="Self.BehaviorType" Multiplicity="0..1" />
+    <End Role="BehaviorPerformed" Type="Self.BehaviorPerformed" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BehaviorType">
+        <PropertyRef Name="behaviorID" />
+      </Principal>
+      <Dependent Role="BehaviorPerformed">
+        <PropertyRef Name="behaviorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BehaviorP__stude__6FE99F9F">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="BehaviorPerformed" Type="Self.BehaviorPerformed" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="BehaviorPerformed">
+        <PropertyRef Name="studentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BehaviorT__class__6D0D32F4">
+    <End Role="Classroom" Type="Self.Classroom" Multiplicity="0..1" />
+    <End Role="BehaviorType" Type="Self.BehaviorType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classroom">
+        <PropertyRef Name="classID" />
+      </Principal>
+      <Dependent Role="BehaviorType">
+        <PropertyRef Name="classID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Class__teacherID__5DCAEF64">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="Classroom" Type="Self.Classroom" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="TeacherID" />
+      </Principal>
+      <Dependent Role="Classroom">
+        <PropertyRef Name="teacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PrizeRequ__prize__6A30C649">
+    <End Role="Prize" Type="Self.Prize" Multiplicity="0..1" />
+    <End Role="PrizeRequest" Type="Self.PrizeRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prize">
+        <PropertyRef Name="prizeID" />
+      </Principal>
+      <Dependent Role="PrizeRequest">
+        <PropertyRef Name="prizeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PrizeRequ__stude__6754599E">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="PrizeRequest" Type="Self.PrizeRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="PrizeRequest">
+        <PropertyRef Name="studentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Student__classID__619B8048">
+    <End Role="Classroom" Type="Self.Classroom" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classroom">
+        <PropertyRef Name="classID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="classID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Student__parentI__60A75C0F">
+    <End Role="Parent" Type="Self.Parent" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Parent">
+        <PropertyRef Name="parentID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="parentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ClassroomManagementTestModelStoreContainer">
+    <EntitySet Name="BehaviorPerformed" EntityType="Self.BehaviorPerformed" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BehaviorType" EntityType="Self.BehaviorType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Classroom" EntityType="Self.Classroom" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Parent" EntityType="Self.Parent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Prize" EntityType="Self.Prize" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PrizeRequest" EntityType="Self.PrizeRequest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__BehaviorP__behav__6EF57B66" Association="Self.FK__BehaviorP__behav__6EF57B66">
+      <End Role="BehaviorType" EntitySet="BehaviorType" />
+      <End Role="BehaviorPerformed" EntitySet="BehaviorPerformed" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BehaviorP__stude__6FE99F9F" Association="Self.FK__BehaviorP__stude__6FE99F9F">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="BehaviorPerformed" EntitySet="BehaviorPerformed" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BehaviorT__class__6D0D32F4" Association="Self.FK__BehaviorT__class__6D0D32F4">
+      <End Role="Classroom" EntitySet="Classroom" />
+      <End Role="BehaviorType" EntitySet="BehaviorType" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Class__teacherID__5DCAEF64" Association="Self.FK__Class__teacherID__5DCAEF64">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="Classroom" EntitySet="Classroom" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PrizeRequ__prize__6A30C649" Association="Self.FK__PrizeRequ__prize__6A30C649">
+      <End Role="Prize" EntitySet="Prize" />
+      <End Role="PrizeRequest" EntitySet="PrizeRequest" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PrizeRequ__stude__6754599E" Association="Self.FK__PrizeRequ__stude__6754599E">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="PrizeRequest" EntitySet="PrizeRequest" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Student__classID__619B8048" Association="Self.FK__Student__classID__619B8048">
+      <End Role="Classroom" EntitySet="Classroom" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Student__parentI__60A75C0F" Association="Self.FK__Student__parentI__60A75C0F">
+      <End Role="Parent" EntitySet="Parent" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
