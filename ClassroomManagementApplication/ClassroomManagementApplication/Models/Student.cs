@@ -27,6 +27,7 @@ namespace ClassroomManagementApplication.Models
         public Nullable<decimal> totalPoints { get; set; }
         public Nullable<decimal> parentID { get; set; }
         public Nullable<decimal> classID { get; set; }
+        public string UserID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BehaviorPerformed> BehaviorPerformeds { get; set; }
