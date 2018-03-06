@@ -13,10 +13,10 @@ namespace ClassroomManagementApplication.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ClassroomManagementTestEntities : DbContext
+    public partial class Entities : DbContext
     {
-        public ClassroomManagementTestEntities()
-            : base("name=ClassroomManagementTestEntities")
+        public Entities()
+            : base("name=Entities")
         {
         }
     

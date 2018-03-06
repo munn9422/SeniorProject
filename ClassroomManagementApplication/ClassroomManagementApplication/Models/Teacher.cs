@@ -25,6 +25,7 @@ namespace ClassroomManagementApplication.Models
         public string teacherFirst { get; set; }
         public string teacherLast { get; set; }
         public string title { get; set; }
+        public string UserID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Classroom> Classrooms { get; set; }

@@ -23,6 +23,7 @@ namespace ClassroomManagementApplication.Models
         public Nullable<decimal> parentUsername { get; set; }
         public string parentFirst { get; set; }
         public decimal parentID { get; set; }
+        public string UserID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Student> Students { get; set; }
