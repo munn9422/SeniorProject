@@ -32,6 +32,7 @@
           <Property Name="semesterStart" Type="date" />
           <Property Name="semesterEnd" Type="date" />
           <Property Name="teacherID" Type="numeric" Precision="8" Scale="0" />
+          <Property Name="classCode" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Parent">
           <Key>
@@ -41,14 +42,6 @@
           <Property Name="parentFirst" Type="varchar" MaxLength="20" />
           <Property Name="parentID" Type="numeric" Precision="8" Scale="0" Nullable="false" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" />
-        </EntityType>
-        <EntityType Name="People">
-          <Key>
-            <PropertyRef Name="PersonID" />
-          </Key>
-          <Property Name="PersonID" Type="int" Nullable="false" />
-          <Property Name="PersonName" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="PersonRole" Type="varchar" MaxLength="25" />
         </EntityType>
         <EntityType Name="Prize">
           <Key>
@@ -193,7 +186,6 @@
           <EntitySet Name="BehaviorType" EntityType="Self.BehaviorType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Classroom" EntityType="Self.Classroom" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Parent" EntityType="Self.Parent" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="People" EntityType="Self.People" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Prize" EntityType="Self.Prize" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PrizeRequest" EntityType="Self.PrizeRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
@@ -267,6 +259,7 @@
           <Property Name="semesterStart" Type="DateTime" Precision="0" />
           <Property Name="semesterEnd" Type="DateTime" Precision="0" />
           <Property Name="teacherID" Type="Decimal" Precision="8" Scale="0" />
+          <Property Name="classCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BehaviorTypes" Relationship="Self.FK__BehaviorT__class__6D0D32F4" FromRole="Classroom" ToRole="BehaviorType" />
           <NavigationProperty Name="Teacher" Relationship="Self.FK__Class__teacherID__5DCAEF64" FromRole="Classroom" ToRole="Teacher" />
           <NavigationProperty Name="Students" Relationship="Self.FK__Student__classID__619B8048" FromRole="Classroom" ToRole="Student" />
@@ -280,14 +273,6 @@
           <Property Name="parentID" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
           <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Students" Relationship="Self.FK__Student__parentI__60A75C0F" FromRole="Parent" ToRole="Student" />
-        </EntityType>
-        <EntityType Name="Person">
-          <Key>
-            <PropertyRef Name="PersonID" />
-          </Key>
-          <Property Name="PersonID" Type="Int32" Nullable="false" />
-          <Property Name="PersonName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PersonRole" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Prize">
           <Key>
@@ -440,7 +425,6 @@
           <EntitySet Name="BehaviorTypes" EntityType="Self.BehaviorType" />
           <EntitySet Name="Classrooms" EntityType="Self.Classroom" />
           <EntitySet Name="Parents" EntityType="Self.Parent" />
-          <EntitySet Name="People" EntityType="Self.Person" />
           <EntitySet Name="Prizes" EntityType="Self.Prize" />
           <EntitySet Name="PrizeRequests" EntityType="Self.PrizeRequest" />
           <EntitySet Name="Students" EntityType="Self.Student" />
@@ -512,6 +496,7 @@
                 <ScalarProperty Name="semesterStart" ColumnName="semesterStart" />
                 <ScalarProperty Name="semesterEnd" ColumnName="semesterEnd" />
                 <ScalarProperty Name="teacherID" ColumnName="teacherID" />
+                <ScalarProperty Name="classCode" ColumnName="classCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -522,15 +507,6 @@
                 <ScalarProperty Name="parentFirst" ColumnName="parentFirst" />
                 <ScalarProperty Name="parentID" ColumnName="parentID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="People">
-            <EntityTypeMapping TypeName="ClassroomManagementTestModel.Person">
-              <MappingFragment StoreEntitySet="People">
-                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
-                <ScalarProperty Name="PersonName" ColumnName="PersonName" />
-                <ScalarProperty Name="PersonRole" ColumnName="PersonRole" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

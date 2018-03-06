@@ -25,6 +25,7 @@ namespace ClassroomManagementApplication.Models
         public Nullable<System.DateTime> semesterStart { get; set; }
         public Nullable<System.DateTime> semesterEnd { get; set; }
         public Nullable<decimal> teacherID { get; set; }
+        public string classCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BehaviorType> BehaviorTypes { get; set; }
