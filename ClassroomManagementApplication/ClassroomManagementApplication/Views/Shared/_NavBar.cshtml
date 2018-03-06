@@ -1,11 +1,14 @@
 ﻿
-    <nav class="navbar navbar-default sticky-top nav-custom ">
-        <div class="container">
-                @Html.ActionLink("Classroom Management", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <h5>@Html.ActionLink("Home", "Index", "Home")</h5>
-            <h5>@Html.ActionLink("About", "About", "Home")</h5>
-            <h5>@Html.ActionLink("Contact", "Contact", "Home")</h5>
-            <h5>@Html.Partial("_LoginPartial")</h5>
+    <nav class="navbar navbar-inverse sticky-top nav-custom ">
+        <div class="container-fluid">
+                @Html.ActionLink("Class Act", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <ul class="nav list-inline">
+                <li class="list-inline-item">@Html.ActionLink("Home", "Index", "Home")</li>
+                <li class="list-inline-item">@Html.ActionLink("About", "About", "Home")</li>
+                <li class="list-inline-item">@Html.ActionLink("Contact", "Contact", "Home")</li>
+                <li class="list-inline-item list-btn">@Html.Partial("_LoginPartial")</li>
+            </ul>
+            
         </div>
     </nav>
 
