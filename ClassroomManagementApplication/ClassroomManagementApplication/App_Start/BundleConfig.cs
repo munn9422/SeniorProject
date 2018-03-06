@@ -24,8 +24,7 @@ namespace ClassroomManagementApplication
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                        //uses sketchy boostrap theme from bootswatch
-                      "~/Content/bootstrap-sketchy.css",
+                      "~/Content/bootstrap-litera.css",
                       "~/Content/site.css"));
         }
     }

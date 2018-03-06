@@ -1,0 +1,13 @@
+﻿<div class="container">
+    <div class="navbar sticky-top navbar-light bg-faded">
+        <div class="container">
+            <div class="navbar-header">
+                @Html.ActionLink("Classroom Management", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <h5>@Html.ActionLink("Home", "Index", "Home")</h5>
+            <h5>@Html.ActionLink("About", "About", "Home")</h5>
+            <h5>@Html.ActionLink("Contact", "Contact", "Home")</h5>
+            <h5>@Html.Partial("_LoginPartial")</h5>
+        </div>
+    </div>
+</div>
