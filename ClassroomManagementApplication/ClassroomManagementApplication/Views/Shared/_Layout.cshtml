@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Classroom Management Application</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/nav-custom.css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
+    
 <body>
-
     @Html.Partial("_NavBar")
     <div class="container body-content">
         @RenderBody()
