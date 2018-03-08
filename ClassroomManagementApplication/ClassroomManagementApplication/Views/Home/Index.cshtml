@@ -2,9 +2,10 @@
     ViewBag.Title = "Home Page";
 }
 <head>
-    @Styles.Render("~/Content/index.css")
+    @Styles.Render("~/Content/indexFile.css")
 </head>
 
-<div class="jumbotron">
-    <h1>Class Act</h1>
+<div class="index-info">
+    <h1>Track Student Behavior</h1>
+    @Html.Partial("_LoginPartial")
 </div>
