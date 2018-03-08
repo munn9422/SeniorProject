@@ -7,7 +7,7 @@ var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenti
         <div id="socialLoginList">
             <p>
                 @foreach (AuthenticationDescription p in loginProviders) {
-                    <button type="submit" class="btn btn-link" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">Sign in with @p.AuthenticationType</button>
+                    <button type="submit" class="btn btn-light" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">Sign in with @p.AuthenticationType</button>
                 }
             </p>
         </div>
