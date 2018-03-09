@@ -1,4 +1,5 @@
 ﻿
+<<<<<<< HEAD
 <div class="navbar sticky-top navbar-light bg-faded">
     <div class="container">
         <div class="navbar-header">
@@ -10,3 +11,18 @@
         <h5>@Html.Partial("_LoginPartial")</h5>
     </div>
 </div>
+=======
+    <nav class="navbar navbar-inverse sticky-top nav-custom ">
+        <div class="container-fluid">
+                @Html.ActionLink("Class Act", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <ul class="nav list-inline">
+                <li class="list-inline-item">@Html.ActionLink("Home", "Index", "Home")</li>
+                <li class="list-inline-item">@Html.ActionLink("About", "About", "Home")</li>
+                <li class="list-inline-item">@Html.ActionLink("Contact", "Contact", "Home")</li>
+                <li class="list-inline-item">@Html.Partial("_LoginPartial")</li>
+            </ul>
+            
+        </div>
+    </nav>
+
+>>>>>>> c9c34895cebe8704221639ca4ec0fe5ba7a9709a

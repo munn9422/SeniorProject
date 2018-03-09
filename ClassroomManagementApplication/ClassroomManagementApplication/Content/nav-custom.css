@@ -1,0 +1,22 @@
+﻿.nav-custom{
+    background-color:black;
+    margin-bottom:1em;
+}
+body{
+    padding-top:0px;
+}
+
+a{
+    color:white;
+}
+
+#Google {
+    color: black;
+    margin-top: 1.5em;
+}
+
+
+.list-inline-item {
+    margin: auto;
+}
+

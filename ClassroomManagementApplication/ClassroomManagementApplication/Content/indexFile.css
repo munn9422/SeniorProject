@@ -1,0 +1,17 @@
+﻿body {
+    min-height: 100%;
+    margin: 0;
+    background-color: lightgray;
+}
+
+html {
+    min-height: 100%;
+    margin: 0;
+}
+
+.index-info {
+    margin-top:25%;
+    margin-bottom:23%;
+    height: 100%;
+    text-align: center;
+}
