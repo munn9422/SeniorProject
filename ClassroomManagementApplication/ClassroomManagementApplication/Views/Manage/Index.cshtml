@@ -1,14 +1,41 @@
 ﻿@model ClassroomManagementApplication.Models.IndexViewModel
+@section scripts {
+    <script src="~/Scripts/ManageAccount.js"></script>
+}
 @{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "Manage your account settings";
 }
 
 <h2>@ViewBag.Title.</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
-    <h4>Change your account settings</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            Account Role:
+        </dt>
+        <dd>
+            <div id="currentRole">
+                @{if (Model.userClassroomRole == null)
+                    {
+                        <div> I am a ...</div>
+                        <a href="javascript:document.addEventListener('dOMContentLoaded', function() {chooseRole();});">ok</a>
+                    }
+                    else
+                    {
+                        <div> I am a @Model.userClassroomRole</div>
+                        <button id="editRole" onclick="editRole()">Change Role</button>
+                    }
+                }
+            </div>
+            <form id="editRoleForm" action="/Manage/UpdateRole" hidden>
+                @Html.AntiForgeryToken();
+                <input type="radio" name="Student" />
+                <input type="radio" name="Teacher" />
+                <input type="radio" name="Parent" />
+                <button type="submit">Save</button>
+            </form>
+        </dd>
     </dl>
 </div>

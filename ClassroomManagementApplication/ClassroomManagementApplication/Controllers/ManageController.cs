@@ -57,11 +57,12 @@ namespace ClassroomManagementApplication.Controllers
             ViewBag.StatusMessage =
                 message == ManageMessageId.Error ? "An error has occurred."
                 : "";
-
-            var userId = User.Identity.GetUserId();
             var model = new IndexViewModel();
+            model.userClassroomRole = UserManager.FindById(User.Identity.GetUserId()).ClassroomRole;
             return View(model);
         }
+
+
 
         //
         // POST: /Manage/LinkLogin
