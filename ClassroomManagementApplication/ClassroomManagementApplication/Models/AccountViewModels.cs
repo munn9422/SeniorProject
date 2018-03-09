@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ClassroomManagementApplication.Models
 {
-    public class ExternalLoginConfirmationViewModel
+    public class ExternalLoginConfirmationViewModel : LoginViewModel
     {
         [Required]
         [Display(Name = "Email")]
