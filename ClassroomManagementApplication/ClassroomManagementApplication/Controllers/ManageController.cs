@@ -62,8 +62,6 @@ namespace ClassroomManagementApplication.Controllers
             return View(model);
         }
 
-
-
         //
         // POST: /Manage/LinkLogin
         [HttpPost]
@@ -96,6 +94,18 @@ namespace ClassroomManagementApplication.Controllers
             }
 
             base.Dispose(disposing);
+        }
+
+        //
+        // POST: /Manage/UpdateRole
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateRole(string roles)
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            user.ClassroomRole = roles;
+            var model = new IndexViewModel();
+            return View(model);
         }
 
         #region Helpers
