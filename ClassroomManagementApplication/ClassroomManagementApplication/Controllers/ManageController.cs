@@ -63,7 +63,7 @@ namespace ClassroomManagementApplication.Controllers
         }
 
         //
-        // POST: /Manage/UpdateRole
+        // POST: /Manage/Index
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index(string role)
@@ -71,7 +71,6 @@ namespace ClassroomManagementApplication.Controllers
             ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());
             user.ClassroomRole = role;
             UserManager.Update(user);
-
             var vmodel = new IndexViewModel();
             vmodel.userClassroomRole = role;
             return View(vmodel);
