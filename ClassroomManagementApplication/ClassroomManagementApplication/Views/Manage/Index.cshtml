@@ -27,14 +27,14 @@
             @using (Html.BeginForm("Index", "Manage", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
-                <container>
-                    <select name="role">
+                    <select name="role" required>
                         <option value="Student">Student</option>
                         <option value="Parent">Parent</option>
                         <option value="Teacher">Teacher</option>
                     </select>
+                    <input type="text" name="fname" required/>
+                    <input type="text" name="lname" required/>
                     <button type="submit">Save</button>
-                </container>
             }
         </dd>
     </dl>

@@ -62,15 +62,38 @@ namespace ClassroomManagementApplication.Controllers
             return View(model);
         }
 
-        //
+        //TODO SANITIZE FORM DATA
         // POST: /Manage/Index
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(string role)
+        public ActionResult Index(string role, string fname)
         {
-            ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());
-            user.ClassroomRole = role;
-            UserManager.Update(user);
+            if (role != null)
+            {
+                
+                if (role == "Student")
+                {
+                    var student = new Student();
+                    student.studentFirst = fname;
+                }
+                else if (role == "Teacher")
+                {
+                    var teacher = new Teacher();
+                    teacher.teacherFirst = fname;
+                }
+                else if (role == "Parent")
+                {
+                    var parent = new Parent();
+                    parent.parentFirst = fname;
+                }
+                //get logged in user from browser context
+                ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());
+                user.ClassroomRole = role;
+
+                UserManager.Update(user);
+            }
+
+
             var vmodel = new IndexViewModel();
             vmodel.userClassroomRole = role;
             return View(vmodel);

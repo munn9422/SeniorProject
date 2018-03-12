@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3da887ff602644b195b2c13976caf8fb" Name="Diagram1">
+        <EntityTypeShape EntityType="ClassroomManagementModel.BehaviorPerformed" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassroomManagementModel.BehaviorType" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassroomManagementModel.Classroom" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassroomManagementModel.Parent" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassroomManagementModel.Prize" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassroomManagementModel.PrizeRequest" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassroomManagementModel.Student" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassroomManagementModel.Teacher" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="ClassroomManagementModel.FK__BehaviorP__behav__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassroomManagementModel.FK__BehaviorP__stude__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassroomManagementModel.FK__BehaviorT__class__6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassroomManagementModel.FK__Class__teacherID__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassroomManagementModel.FK__Student__classID__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassroomManagementModel.FK__Student__parentI__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassroomManagementModel.FK__PrizeRequ__prize__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassroomManagementModel.FK__PrizeRequ__stude__6754599E" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
