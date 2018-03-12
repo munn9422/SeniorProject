@@ -14,26 +14,28 @@
     <dl class="dl-horizontal">
         <dt>
             Account Role:
-            @if(Model.userClassroomRole == null)
+            @if (Model.userClassroomRole == null)
             {
                 <div>Please choose a role</div>
-            } else
+            }
+            else
             {
                 <div>@Model.userClassroomRole</div>
             }
         </dt>
         <dd>
-            <form id="editRoleForm" method="post" action="/Manage/UpdateRole">
+            @using (Html.BeginForm("Index", "Manage", FormMethod.Post))
+            {
                 @Html.AntiForgeryToken()
                 <container>
-                    <select name="roles">
+                    <select name="role">
                         <option value="Student">Student</option>
                         <option value="Parent">Parent</option>
                         <option value="Teacher">Teacher</option>
                     </select>
                     <button type="submit">Save</button>
                 </container>
-            </form>
+            }
         </dd>
     </dl>
 </div>

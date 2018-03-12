@@ -63,26 +63,18 @@ namespace ClassroomManagementApplication.Controllers
         }
 
         //
-        // POST: /Manage/LinkLogin
+        // POST: /Manage/UpdateRole
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult LinkLogin(string provider)
+        public ActionResult Index(string role)
         {
-            // Request a redirect to the external login provider to link a login for the current user
-            return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
-        }
+            ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());
+            user.ClassroomRole = role;
+            UserManager.Update(user);
 
-        //
-        // GET: /Manage/LinkLoginCallback
-        public async Task<ActionResult> LinkLoginCallback()
-        {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
-            if (loginInfo == null)
-            {
-                return RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
-            }
-            var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
-            return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
+            var vmodel = new IndexViewModel();
+            vmodel.userClassroomRole = role;
+            return View(vmodel);
         }
 
         protected override void Dispose(bool disposing)
@@ -94,18 +86,6 @@ namespace ClassroomManagementApplication.Controllers
             }
 
             base.Dispose(disposing);
-        }
-
-        //
-        // POST: /Manage/UpdateRole
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult UpdateRole(string roles)
-        {
-            var user = UserManager.FindById(User.Identity.GetUserId());
-            user.ClassroomRole = roles;
-            var model = new IndexViewModel();
-            return View(model);
         }
 
         #region Helpers
