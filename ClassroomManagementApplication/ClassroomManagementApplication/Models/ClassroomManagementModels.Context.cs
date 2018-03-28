@@ -16,7 +16,7 @@ namespace ClassroomManagementApplication.Models
     public partial class Entities : DbContext
     {
         public Entities()
-            : base("name=Entities")
+            : base("name=DefaultConnection")
         {
         }
     

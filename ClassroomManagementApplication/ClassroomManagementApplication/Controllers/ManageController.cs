@@ -57,8 +57,10 @@ namespace ClassroomManagementApplication.Controllers
             ViewBag.StatusMessage =
                 message == ManageMessageId.Error ? "An error has occurred."
                 : "";
-            var model = new IndexViewModel();
-            model.userClassroomRole = UserManager.FindById(User.Identity.GetUserId()).ClassroomRole;
+            var model = new IndexViewModel
+            {
+                userClassroomRole = UserManager.FindById(User.Identity.GetUserId()).ClassroomRole
+            };
             return View(model);
         }
 
@@ -66,36 +68,46 @@ namespace ClassroomManagementApplication.Controllers
         // POST: /Manage/Index
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(string role, string fname)
+        public ActionResult Index(string role, string fname, string lname)
         {
             if (role != null)
             {
-                
                 if (role == "Student")
                 {
-                    var student = new Student();
-                    student.studentFirst = fname;
+                    var student = new Student
+                    {
+                        studentFirst = fname
+                    };
+                    UserBinding.SaveAccountType(student);
                 }
                 else if (role == "Teacher")
                 {
-                    var teacher = new Teacher();
-                    teacher.teacherFirst = fname;
+                    var teacher = new Teacher
+                    {
+                        teacherFirst = fname,
+                        teacherLast = lname
+                    };
+                    UserBinding.SaveAccountType(teacher);
                 }
                 else if (role == "Parent")
                 {
-                    var parent = new Parent();
-                    parent.parentFirst = fname;
+                    var parent = new Parent
+                    {
+                        parentFirst = fname
+                    };
+                    UserBinding.SaveAccountType(parent);
                 }
                 //get logged in user from browser context
                 ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());
                 user.ClassroomRole = role;
-
                 UserManager.Update(user);
             }
 
 
-            var vmodel = new IndexViewModel();
-            vmodel.userClassroomRole = role;
+            var vmodel = new IndexViewModel
+            {
+                userClassroomRole = role
+            };
             return View(vmodel);
         }
 
