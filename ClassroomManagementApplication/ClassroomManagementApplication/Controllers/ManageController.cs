@@ -52,21 +52,40 @@ namespace ClassroomManagementApplication.Controllers
 
         //
         // GET: /Manage/Index
+        [Authorize]
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.Error ? "An error has occurred."
-                : "";
+                message == ManageMessageId.Error ? "An error has occurred." : "";
+
+            var AspNetUser = UserManager.FindById(User.Identity.GetUserId());
             var model = new IndexViewModel
             {
-                userClassroomRole = UserManager.FindById(User.Identity.GetUserId()).ClassroomRole
+                userClassroomRole = AspNetUser.ClassroomRole
             };
+            if (AspNetUser.ClassroomRole == "Student")
+            {
+                Student studentUser = UserBinding.getStudent(AspNetUser.Id);
+                model.userfname = studentUser.studentFirst;
+            }
+            else if (AspNetUser.ClassroomRole == "Parent")
+            {
+                Parent parentUser = UserBinding.getParent(AspNetUser.Id);
+                model.userfname = parentUser.parentFirst;
+            }
+            else if (AspNetUser.ClassroomRole == "Teacher")
+            {
+                Teacher teacherUser = UserBinding.getTeacher(AspNetUser.Id);
+                model.userfname = teacherUser.teacherFirst;
+                model.userlname = teacherUser.teacherLast;
+            }
             return View(model);
         }
 
         //TODO SANITIZE FORM DATA
         // POST: /Manage/Index
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Index(string role, string fname, string lname)
         {
@@ -76,7 +95,9 @@ namespace ClassroomManagementApplication.Controllers
                 {
                     var student = new Student
                     {
-                        studentFirst = fname
+                        studentFirst = fname,
+                        UserID = User.Identity.GetUserId(),
+                        studentUsername = User.Identity.GetUserName()
                     };
                     UserBinding.SaveAccountType(student);
                 }
@@ -85,7 +106,9 @@ namespace ClassroomManagementApplication.Controllers
                     var teacher = new Teacher
                     {
                         teacherFirst = fname,
-                        teacherLast = lname
+                        teacherLast = lname,
+                        UserID = User.Identity.GetUserId(),
+                        teacherUsername = User.Identity.GetUserName()
                     };
                     UserBinding.SaveAccountType(teacher);
                 }
@@ -93,8 +116,10 @@ namespace ClassroomManagementApplication.Controllers
                 {
                     var parent = new Parent
                     {
-                        parentFirst = fname
-                    };
+                        parentFirst = fname,
+                        UserID = User.Identity.GetUserId(),
+                        parentUsername = User.Identity.GetUserName()
+                };
                     UserBinding.SaveAccountType(parent);
                 }
                 //get logged in user from browser context

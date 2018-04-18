@@ -16,7 +16,7 @@ namespace ClassroomManagementApplication.Models
     public partial class Entities : DbContext
     {
         public Entities()
-            : base("name=DefaultConnection")
+            : base("name=Entities")
         {
         }
     
@@ -25,13 +25,13 @@ namespace ClassroomManagementApplication.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<BehaviorPerformed> BehaviorPerformeds { get; set; }
-        public virtual DbSet<BehaviorType> BehaviorTypes { get; set; }
-        public virtual DbSet<Classroom> Classrooms { get; set; }
-        public virtual DbSet<Parent> Parents { get; set; }
-        public virtual DbSet<Prize> Prizes { get; set; }
-        public virtual DbSet<PrizeRequest> PrizeRequests { get; set; }
-        public virtual DbSet<Student> Students { get; set; }
-        public virtual DbSet<Teacher> Teachers { get; set; }
+        public virtual DbSet<BehaviorPerformed> BehaviorPerformed { get; set; }
+        public virtual DbSet<BehaviorType> BehaviorType { get; set; }
+        public virtual DbSet<Classroom> Classroom { get; set; }
+        public virtual DbSet<Parent> Parent { get; set; }
+        public virtual DbSet<Prize> Prize { get; set; }
+        public virtual DbSet<PrizeRequest> PrizeRequest { get; set; }
+        public virtual DbSet<Student> Student { get; set; }
+        public virtual DbSet<Teacher> Teacher { get; set; }
     }
 }

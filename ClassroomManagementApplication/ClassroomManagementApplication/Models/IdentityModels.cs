@@ -52,7 +52,7 @@ namespace ClassroomManagementApplication.Models
                 Student student = (Student)person;
                 using (var context = new Entities())
                 {
-                    var recordToUpdate = from s in context.Students
+                    var recordToUpdate = from s in context.Student
                                          where s.StudentID == student.StudentID
                                          select s;
                     List<Student> records = recordToUpdate.ToList();
@@ -60,7 +60,11 @@ namespace ClassroomManagementApplication.Models
                     {
                         Student old = records.FirstOrDefault();
                         context.Entry(old).CurrentValues.SetValues(student);
+                    } else
+                    {
+                        context.Set<Student>().Add(student);
                     }
+                    context.SaveChanges();
                 }
             }
             else if (person.GetType() == typeof(Parent))
@@ -68,7 +72,7 @@ namespace ClassroomManagementApplication.Models
                 Parent parent = (Parent)person;
                 using (var context = new Entities())
                 {
-                    var recordToUpdate = from p in context.Parents
+                    var recordToUpdate = from p in context.Parent
                                          where p.parentID == parent.parentID
                                          select p;
                     List<Parent> records = recordToUpdate.ToList();
@@ -77,6 +81,11 @@ namespace ClassroomManagementApplication.Models
                         Parent old = records.FirstOrDefault();
                         context.Entry(old).CurrentValues.SetValues(parent);
                     }
+                    else
+                    {
+                        context.Set<Parent>().Add(parent);
+                    }
+                    context.SaveChanges();
                 }
             }
             else if (person.GetType() == typeof(Teacher))
@@ -84,7 +93,7 @@ namespace ClassroomManagementApplication.Models
                 Teacher teacher = (Teacher)person;
                 using (var context = new Entities())
                 {
-                    var recordToUpdate = from t in context.Teachers
+                    var recordToUpdate = from t in context.Teacher
                                          where t.TeacherID == teacher.TeacherID
                                          select t;
                     List<Teacher> records = recordToUpdate.ToList();
@@ -93,8 +102,73 @@ namespace ClassroomManagementApplication.Models
                         Teacher old = records.FirstOrDefault();
                         context.Entry(old).CurrentValues.SetValues(teacher);
                     }
+                    else
+                    {
+                        context.Set<Teacher>().Add(teacher);
+                    }
+                    context.SaveChanges();
                 }
             }
+        }
+        public static Student getStudent(string UserID)
+        {
+            if (UserID == null)
+            {
+                return null;
+            }
+            Student st = new Student();
+            using (var context = new Entities())
+            {
+                var query = from s in context.Student
+                                     where s.UserID == UserID
+                                     select s;
+                List<Student> records = query.ToList();
+                if (records.Count() > 0)
+                {
+                    st = records.FirstOrDefault();
+                }
+            }
+            return st;
+        }
+        public static Parent getParent(string UserID)
+        {
+            if (UserID == null)
+            {
+                return null;
+            }
+            Parent pa = new Parent();
+            using (var context = new Entities())
+            {
+                var query = from p in context.Parent
+                            where p.UserID == UserID
+                            select p;
+                List<Parent> records = query.ToList();
+                if (records.Count() > 0)
+                {
+                    pa = records.FirstOrDefault();
+                }
+            }
+            return pa;
+        }
+        public static Teacher getTeacher(string UserID)
+        {
+            if (UserID == null)
+            {
+                return null;
+            }
+            Teacher te = new Teacher();
+            using (var context = new Entities())
+            {
+                var query = from t in context.Teacher
+                            where t.UserID == UserID
+                            select t;
+                List<Teacher> records = query.ToList();
+                if (records.Count() > 0)
+                {
+                    te = records.FirstOrDefault();
+                }
+            }
+            return te;
         }
     }
 }

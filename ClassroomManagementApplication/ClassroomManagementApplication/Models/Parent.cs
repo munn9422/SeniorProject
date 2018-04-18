@@ -17,15 +17,15 @@ namespace ClassroomManagementApplication.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Parent()
         {
-            this.Students = new HashSet<Student>();
+            this.Student = new HashSet<Student>();
         }
     
-        public Nullable<decimal> parentUsername { get; set; }
+        public string parentUsername { get; set; }
         public string parentFirst { get; set; }
         public decimal parentID { get; set; }
         public string UserID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Student> Students { get; set; }
+        public virtual ICollection<Student> Student { get; set; }
     }
 }

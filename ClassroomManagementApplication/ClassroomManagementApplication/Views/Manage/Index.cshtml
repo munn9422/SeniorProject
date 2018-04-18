@@ -12,30 +12,37 @@
 <div>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            Account Role:
-            @if (Model.userClassroomRole == null)
-            {
-                <div>Please choose a role</div>
-            }
-            else
-            {
-                <div>@Model.userClassroomRole</div>
-            }
-        </dt>
-        <dd>
-            @using (Html.BeginForm("Index", "Manage", FormMethod.Post))
-            {
+        @using (Html.BeginForm("Index", "Manage", FormMethod.Post))
+        {
+            <dt>
+                Account Role:
+                @if (Model.userClassroomRole == null)
+                {
+                    <span>Please choose a role</span>
+                }
+                else
+                {
+                    <span>@Model.userClassroomRole</span>
+                }
+            </dt>
+            <dd>
                 @Html.AntiForgeryToken()
-                    <select name="role" required>
-                        <option value="Student">Student</option>
-                        <option value="Parent">Parent</option>
-                        <option value="Teacher">Teacher</option>
-                    </select>
-                    <input type="text" name="fname" required/>
-                    <input type="text" name="lname" required/>
-                    <button type="submit">Save</button>
-            }
-        </dd>
+                <select name="role" required>
+                    <option value="Student">Student</option>
+                    <option value="Parent">Parent</option>
+                    <option value="Teacher">Teacher</option>
+                </select>
+            </dd>
+            <dt>First Name</dt>
+            <dd>
+                <input type="text" name="fname" value="@Model.userfname" required />
+            </dd>
+            <dt>Last Name</dt>
+            <dd>
+                <input type="text" name="lname" value="@Model.userlname" required />
+            </dd>
+
+            <input type="submit" value="Update Settings"/>
+        }
     </dl>
 </div>

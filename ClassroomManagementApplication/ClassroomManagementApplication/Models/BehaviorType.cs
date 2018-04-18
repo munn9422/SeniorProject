@@ -17,7 +17,7 @@ namespace ClassroomManagementApplication.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public BehaviorType()
         {
-            this.BehaviorPerformeds = new HashSet<BehaviorPerformed>();
+            this.BehaviorPerformed = new HashSet<BehaviorPerformed>();
         }
     
         public decimal behaviorID { get; set; }
@@ -27,7 +27,7 @@ namespace ClassroomManagementApplication.Models
         public Nullable<decimal> classID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BehaviorPerformed> BehaviorPerformeds { get; set; }
+        public virtual ICollection<BehaviorPerformed> BehaviorPerformed { get; set; }
         public virtual Classroom Classroom { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace ClassroomManagementApplication.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Teacher()
         {
-            this.Classrooms = new HashSet<Classroom>();
+            this.Classroom = new HashSet<Classroom>();
         }
     
         public decimal TeacherID { get; set; }
@@ -28,6 +28,6 @@ namespace ClassroomManagementApplication.Models
         public string UserID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Classroom> Classrooms { get; set; }
+        public virtual ICollection<Classroom> Classroom { get; set; }
     }
 }

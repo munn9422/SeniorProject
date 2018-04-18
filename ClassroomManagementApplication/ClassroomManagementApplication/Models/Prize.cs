@@ -17,7 +17,7 @@ namespace ClassroomManagementApplication.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Prize()
         {
-            this.PrizeRequests = new HashSet<PrizeRequest>();
+            this.PrizeRequest = new HashSet<PrizeRequest>();
         }
     
         public decimal prizeID { get; set; }
@@ -26,6 +26,6 @@ namespace ClassroomManagementApplication.Models
         public string prizeDescription { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PrizeRequest> PrizeRequests { get; set; }
+        public virtual ICollection<PrizeRequest> PrizeRequest { get; set; }
     }
 }
