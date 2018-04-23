@@ -1,7 +1,9 @@
 ﻿@model ClassroomManagementApplication.Models.IndexViewModel
 @section scripts {
     <script src="~/Scripts/ManageAccount.js"></script>
+    
 }
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 @{
     ViewBag.Title = "Manage your account settings";
 }
@@ -27,22 +29,45 @@
             </dt>
             <dd>
                 @Html.AntiForgeryToken()
-                <select name="role" required>
+
+                <select name="role" id="role" required>
                     <option value="Student">Student</option>
                     <option value="Parent">Parent</option>
                     <option value="Teacher">Teacher</option>
                 </select>
             </dd>
+
             <dt>First Name</dt>
             <dd>
-                <input type="text" name="fname" value="@Model.userfname" required />
-            </dd>
-            <dt>Last Name</dt>
-            <dd>
-                <input type="text" name="lname" value="@Model.userlname" required />
+                <input type="text" name="fname" value="@Model.userfname" placeholder="First Name" required />
             </dd>
 
-            <input type="submit" value="Update Settings"/>
-        }
-    </dl>
+            <div id="lastName">
+                <dt>Last Name</dt>
+                <dd>
+                    <input type="text" name="lname" value="@Model.userlname" placeholder="Last Name" required />
+                </dd>
+            </div>
+
+
+                    <input type="submit" value="Update Settings" />
+                    }
+</dl>
 </div>
+
+<script>
+    function myFunc() {
+        if ($("#role").val() == "Student") {
+            $("#lastName").hide();
+        };
+    };
+    $("#role").change(function () {
+        if ($("#role").val() != "Student") {
+            $("#lastName").show();
+        }
+        else{
+            $("#lastName").hide();
+        };
+    });
+    myFunc();
+</script>
