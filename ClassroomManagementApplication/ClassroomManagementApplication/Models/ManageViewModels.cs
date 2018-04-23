@@ -6,13 +6,11 @@ using System.Web;
 
 namespace ClassroomManagementApplication.Models
 {
-    //Needs to inherit from login view model because the _layout
-    //uses the _NavBar which uses the _LoginPartial requiring methods
-    //from the LoginViewModel
     public class IndexViewModel
     {
         public string userClassroomRole { get; set; }
         public string userfname { get; set; }
         public string userlname { get; set; }
+        public List<Classroom> userClassrooms { get; set; }
     }
 }

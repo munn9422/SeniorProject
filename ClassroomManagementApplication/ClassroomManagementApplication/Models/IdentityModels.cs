@@ -170,5 +170,19 @@ namespace ClassroomManagementApplication.Models
             }
             return te;
         }
+        public static List<Classroom> getTeacherClassrooms(decimal teacherID)
+        {
+            if (teacherID.Equals(0.0))
+            {
+                return new List<Classroom>();
+            }
+            using (var context = new Entities())
+            {
+                var query = from c in context.Classroom
+                            where c.teacherID == teacherID
+                            select c;
+                return query.ToList();
+            }
+        }
     }
 }
