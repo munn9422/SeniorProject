@@ -1,9 +1,26 @@
 ﻿@model ClassroomManagementApplication.Models.IndexViewModel
 @section scripts {
     <script src="~/Scripts/ManageAccount.js"></script>
-    
-}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        function hideLast() {
+            if ($("#role").val() == "Student") {
+                $("#lastName").hide();
+            };
+        };
+        $("#role").change(function () {
+            if ($("#role").val() != "Student") {
+                $("#lastName").show();
+            }
+            else {
+                $("#lastName").hide();
+            };
+        });
+        hideLast();
+    </script>
+
+}
+
 @{
     ViewBag.Title = "Manage your account settings";
 }
@@ -50,24 +67,8 @@
             </div>
 
 
-                    <input type="submit" value="Update Settings" />
-                    }
-</dl>
+            <input type="submit" value="Update Settings" />
+        }
+    </dl>
 </div>
 
-<script>
-    function hideLast() {
-        if ($("#role").val() == "Student") {
-            $("#lastName").hide();
-        };
-    };
-    $("#role").change(function () {
-        if ($("#role").val() != "Student") {
-            $("#lastName").show();
-        }
-        else{
-            $("#lastName").hide();
-        };
-    });
-    hideLast();
-</script>
