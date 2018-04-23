@@ -1,4 +1,5 @@
 ﻿@model ClassroomManagementApplication.Models.IndexViewModel
+@using ClassroomManagementApplication.Models 
 @{
     ViewBag.Title = "Home Page";
 }
@@ -15,6 +16,10 @@
 {
     <div>
         @Html.ActionLink("New classroom","Add","Classroom")
+        @foreach(Classroom cr in Model.userClassrooms)
+        {
+            <p>@cr.classID</p>
+        }
     </div>
 }
 else if (Model.userClassroomRole == "Student")

@@ -13,5 +13,20 @@ namespace ClassroomManagementApplication.Controllers
         {
             return View();
         }
+
+        // GET: Classroom/Add
+        public ActionResult Add()
+        {
+            return View();
+        }
+
+        // POST: /Manage/Index
+        //[HttpPost]
+        //[Authorize]
+        //[ValidateAntiForgeryToken]
+        //public void Add()
+        //{
+
+        //}
     }
 }
