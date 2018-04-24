@@ -8,6 +8,10 @@ namespace ClassroomManagementApplication.Controllers
 {
     public class ClassroomController : Controller
     {
+        public ClassroomController()
+        {
+
+        }
         // GET: Classroom
         public ActionResult Index()
         {
