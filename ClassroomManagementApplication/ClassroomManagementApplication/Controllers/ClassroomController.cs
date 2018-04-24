@@ -1,8 +1,10 @@
-﻿using System;
+﻿using ClassroomManagementApplication.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ClassroomManagementApplication.Models;
 
 namespace ClassroomManagementApplication.Controllers
 {
@@ -24,13 +26,19 @@ namespace ClassroomManagementApplication.Controllers
             return View();
         }
 
-        // POST: /Manage/Index
-        //[HttpPost]
-        //[Authorize]
-        //[ValidateAntiForgeryToken]
-        //public void Add()
-        //{
-
-        //}
-    }
+        //POST: Classroom/Add
+    //   [HttpPost]
+    //   [Authorize]
+    //   [ValidateAntiForgeryToken]
+    //    public ActionResult Add(DateTime start, DateTime end, string code)
+    //    {
+    //        var classroom = new Classroom
+    //        {
+    //            semesterStart = start,
+    //            semesterEnd = end,
+    //            classCode = code
+    //        };
+    //        ClassroomBinding.SaveRoom(classroom);
+    //    }
+    //}
 }

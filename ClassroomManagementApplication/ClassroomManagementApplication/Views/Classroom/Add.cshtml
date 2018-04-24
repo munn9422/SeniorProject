@@ -1,8 +1,43 @@
-﻿
+﻿@model ClassroomManagementApplication.Models.Classroom
 @{
     ViewBag.Title = "Add a Classroom";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $(".datepicker").datepicker();
+        });
+    </script>
+
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+
 
 <h2>Add a new Classroom</h2>
+
+@using (Html.BeginForm("Add", "Classroom", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+
+    <dt>Semester Start:</dt>
+    <dd>
+        <input type="text" class="datepicker"/>
+    </dd>
+    <dt>Semester End:</dt>
+    <dd>
+        <input type="text" class="datepicker"/>
+    </dd>
+    <dt>Class Code:</dt>
+    <dd>
+        <input type="text" />
+    </dd>
+
+    <input type="submit" value="Add Class" />
+}
 

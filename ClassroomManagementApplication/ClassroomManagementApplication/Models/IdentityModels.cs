@@ -185,4 +185,32 @@ namespace ClassroomManagementApplication.Models
             }
         }
     }
+
+
+    //dont know where to put this
+    //public static class ClassroomBinding
+    //{
+    //    public static void SaveRoom(Classroom cl)
+    //    {
+            
+    //        using (var context = new Entities())
+    //        {
+    //            var recordToUpdate = from c in context.Classroom
+    //                                 where c.classID == cl.classID
+    //                                 select c;
+               
+    //            List<Classroom> records = recordToUpdate.ToList();
+    //            if (recordToUpdate.Count() > 0)
+    //            {
+    //                Classroom old = records.FirstOrDefault();
+    //                context.Entry(old).CurrentValues.SetValues(cl);
+    //            }
+    //            else
+    //            {
+    //                context.Set<Classroom>().Add(cl);
+    //            }
+    //            context.SaveChanges();
+    //        }
+    //    }
+    //}
 }
