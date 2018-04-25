@@ -1,5 +1,5 @@
 ﻿@model ClassroomManagementApplication.Models.IndexViewModel
-@using ClassroomManagementApplication.Models 
+@using ClassroomManagementApplication.Models
 @{
     ViewBag.Title = "Home Page";
 }
@@ -11,24 +11,26 @@
     <h1>Track Student Behavior</h1>
     @Html.Partial("_LoginPartial")
 </div>
-
-
-@*If not logged in this causes problems*@
-@*@if (Model.userClassroomRole == "Teacher")
+@if (Request.IsAuthenticated)
 {
-    <div>
-        @Html.ActionLink("New classroom","Add","Classroom")
-        @foreach(Classroom cr in Model.userClassrooms)
-        {
-            <p>@cr.classID</p>
-        }
-    </div>
+    if (Model.userClassroomRole == "Teacher")
+    {
+        <div>
+            Choose a classroom:
+            @Html.ActionLink("New classroom", "Add", "Classroom")
+            @foreach (Classroom cr in Model.userClassrooms)
+            {
+                //TODO check for null datetime
+                @Html.ActionLink(cr.classID.ToString() + "," + cr.semesterStart.Value.ToShortDateString() + "-" + cr.semesterStart.Value.ToShortDateString(), "Classroom", cr.classID)
+            }
+        </div>
+    }
+    else if (Model.userClassroomRole == "Student")
+    {
+
+    }
+    else if (Model.userClassroomRole == "Parent")
+    {
+
+    }
 }
-else if (Model.userClassroomRole == "Student")
-{
-
-}
-else if (Model.userClassroomRole == "Parent")
-{
-
-}*@
