@@ -25,6 +25,10 @@
 
     @Html.AntiForgeryToken()
 
+    <dt>Class Name:</dt>
+    <dd>
+        <input name="code" type="text" />
+    </dd>
     <dt>Semester Start:</dt>
     <dd>
         <input name="start" type="text" class="datepicker" />
@@ -32,10 +36,6 @@
     <dt>Semester End:</dt>
     <dd>
         <input name="end" type="text" class="datepicker" />
-    </dd>
-    <dt>Class Code:</dt>
-    <dd>
-        <input name="code" type="text" />
     </dd>
 
     <input type="submit" value="Add Class" />
