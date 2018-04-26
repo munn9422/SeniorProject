@@ -60,7 +60,8 @@ namespace ClassroomManagementApplication.Models
                     {
                         Student old = records.FirstOrDefault();
                         context.Entry(old).CurrentValues.SetValues(student);
-                    } else
+                    }
+                    else
                     {
                         context.Set<Student>().Add(student);
                     }
@@ -120,8 +121,8 @@ namespace ClassroomManagementApplication.Models
             using (var context = new Entities())
             {
                 var query = from s in context.Student
-                                     where s.UserID == UserID
-                                     select s;
+                            where s.UserID == UserID
+                            select s;
                 List<Student> records = query.ToList();
                 if (records.Count() > 0)
                 {
@@ -185,32 +186,29 @@ namespace ClassroomManagementApplication.Models
             }
         }
     }
+    public static class ClassroomBinding
+    {
+        public static void SaveRoom(Classroom cl)
+        {
 
+            using (var context = new Entities())
+            {
+                var recordToUpdate = from c in context.Classroom
+                                     where c.classID == cl.classID
+                                     select c;
 
-    //dont know where to put this
-    //public static class ClassroomBinding
-    //{
-    //    public static void SaveRoom(Classroom cl)
-    //    {
-            
-    //        using (var context = new Entities())
-    //        {
-    //            var recordToUpdate = from c in context.Classroom
-    //                                 where c.classID == cl.classID
-    //                                 select c;
-               
-    //            List<Classroom> records = recordToUpdate.ToList();
-    //            if (recordToUpdate.Count() > 0)
-    //            {
-    //                Classroom old = records.FirstOrDefault();
-    //                context.Entry(old).CurrentValues.SetValues(cl);
-    //            }
-    //            else
-    //            {
-    //                context.Set<Classroom>().Add(cl);
-    //            }
-    //            context.SaveChanges();
-    //        }
-    //    }
-    //}
+                List<Classroom> records = recordToUpdate.ToList();
+                if (recordToUpdate.Count() > 0)
+                {
+                    Classroom old = records.FirstOrDefault();
+                    context.Entry(old).CurrentValues.SetValues(cl);
+                }
+                else
+                {
+                    context.Set<Classroom>().Add(cl);
+                }
+                context.SaveChanges();
+            }
+        }
+    }
 }
