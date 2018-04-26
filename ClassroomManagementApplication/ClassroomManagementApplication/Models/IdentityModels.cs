@@ -194,7 +194,7 @@ namespace ClassroomManagementApplication.Models
             using (var context = new Entities())
             {
                 var recordToUpdate = from c in context.Classroom
-                                     where c.classID == cl.classID
+                                     where c.classCode == cl.classCode
                                      select c;
 
                 List<Classroom> records = recordToUpdate.ToList();
@@ -209,6 +209,19 @@ namespace ClassroomManagementApplication.Models
                 }
                 context.SaveChanges();
             }
+        }
+        
+
+        public static decimal GenerateClassId()
+        {
+            using (var context = new Entities())
+            {
+                decimal highestId = 0;
+                var previousId = context.Classroom.Max(c => c.classID);
+                highestId = previousId + 1;
+                return highestId;
+            }
+
         }
     }
 }

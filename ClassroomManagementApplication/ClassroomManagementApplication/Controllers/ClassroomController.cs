@@ -66,9 +66,10 @@ namespace ClassroomManagementApplication.Controllers
         public ActionResult Add(DateTime start, DateTime end, string code)
         {
             Teacher t = UserBinding.getTeacher(User.Identity.GetUserId());
-            
+
             var classroom = new Classroom
             {
+                classID = ClassroomBinding.GenerateClassId(),
                 semesterStart = start,
                 semesterEnd = end,
                 classCode = code,
