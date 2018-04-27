@@ -210,8 +210,6 @@ namespace ClassroomManagementApplication.Models
                 context.SaveChanges();
             }
         }
-        
-
         public static decimal GenerateClassId()
         {
             using (var context = new Entities())

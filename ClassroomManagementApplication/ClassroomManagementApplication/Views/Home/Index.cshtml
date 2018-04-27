@@ -9,28 +9,5 @@
 
 <div class="index-info">
     <h1>Track Student Behavior</h1>
-    @Html.Partial("_LoginPartial")
+    @Html.Partial("_LoginPartial", Model)
 </div>
-@if (Request.IsAuthenticated)
-{
-    if (Model.userClassroomRole == "Teacher")
-    {
-        <div>
-            Choose a classroom:
-            @Html.ActionLink("New classroom", "Add", "Classroom")
-            @foreach (Classroom cr in Model.userClassrooms)
-            {
-                //TODO check for null datetime
-                @Html.ActionLink(cr.classID.ToString() + "," + cr.semesterStart.Value.ToShortDateString() + "-" + cr.semesterStart.Value.ToShortDateString(), "Classroom", cr.classID)
-            }
-        </div>
-    }
-    else if (Model.userClassroomRole == "Student")
-    {
-
-    }
-    else if (Model.userClassroomRole == "Parent")
-    {
-
-    }
-}
