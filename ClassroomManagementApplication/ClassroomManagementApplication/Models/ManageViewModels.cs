@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ClassroomManagementApplication.Models
 {
-    public class IndexViewModel : 
+    public class IndexViewModel :  ExternalLoginConfirmationViewModel
     {
         public string userClassroomRole { get; set; }
         public string userfname { get; set; }
