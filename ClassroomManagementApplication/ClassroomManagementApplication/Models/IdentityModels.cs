@@ -182,7 +182,11 @@ namespace ClassroomManagementApplication.Models
                 var query = from c in context.Classroom
                             where c.teacherID == teacherID
                             select c;
-                return query.ToList();
+                var results = query.ToList();
+                if (query.Count() < 1) {
+                    return new List<Models.Classroom>();
+                }
+                else return results;
             }
         }
     }
