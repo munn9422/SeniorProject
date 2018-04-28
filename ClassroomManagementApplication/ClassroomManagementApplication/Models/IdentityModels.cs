@@ -189,6 +189,18 @@ namespace ClassroomManagementApplication.Models
                 else return results;
             }
         }
+
+        public static decimal GenerateTeacherId()
+        {
+            using (var context = new Entities())
+            {
+                decimal highestId = 0;
+                var previousId = context.Teacher.Max(t => t.TeacherID);
+                highestId = previousId + 1;
+                return highestId;
+            }
+
+        }
     }
     public static class ClassroomBinding
     {
