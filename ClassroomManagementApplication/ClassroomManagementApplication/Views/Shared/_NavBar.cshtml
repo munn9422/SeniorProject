@@ -1,4 +1,4 @@
-﻿@model ClassroomManagementApplication.Models.Classroom
+﻿@model ClassroomManagementApplication.Models.IndexViewModel
 @using ClassroomManagementApplication.Models
 <nav class="navbar navbar-inverse sticky-top nav-custom ">
     <div class="container-fluid">
@@ -18,7 +18,7 @@
                         @foreach (Classroom cr in Model.userClassrooms)
                         {
                             //TODO check for null datetime
-                            @Html.ActionLink(cr.classID.ToString() + "," + cr.semesterStart.Value.ToShortDateString() + "-" + cr.semesterEnd.Value.ToShortDateString() + "Classroom", "Index", )
+                            Html.ActionLink(cr.classID.ToString() + "," + cr.semesterStart.Value.ToShortDateString() + "-" + cr.semesterEnd.Value.ToShortDateString() + "Classroom", "Index", cr.classCode);
                         }
                     </li>
                 }
