@@ -31,10 +31,14 @@ namespace ClassroomManagementApplication.Controllers
         {
             var behavior = new BehaviorType
             {
+                behaviorID = BehaviorBinding.GenerateBehaviorId(),
                 behaviorTitle = title,
                 behaviorDescription = desc,
                 pointValue = point
             };
+
+            BehaviorBinding.SaveBehavior(behavior);
+            return View();
         }
     }
 }

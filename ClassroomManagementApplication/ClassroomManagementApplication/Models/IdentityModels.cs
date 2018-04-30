@@ -238,4 +238,31 @@ namespace ClassroomManagementApplication.Models
 
         }
     }
+
+    public static class BehaviorBinding
+    {
+        public static void SaveBehavior(BehaviorType bt)
+        {
+
+            using (var context = new Entities())
+            {
+                var recordToUpdate = from b in context.BehaviorType
+                                     where b.behaviorID == bt.behaviorID
+                                     select b;
+
+                List<BehaviorType> records = recordToUpdate.ToList();
+                if (recordToUpdate.Count() > 0)
+                {
+                    BehaviorType old = records.FirstOrDefault();
+                    context.Entry(old).CurrentValues.SetValues(bt);
+                }
+                else
+                {
+                    context.Set<BehaviorType>().Add(bt);
+                }
+                context.SaveChanges();
+            }
+        }
+    }
+
 }
