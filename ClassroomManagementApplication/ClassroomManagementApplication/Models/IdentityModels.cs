@@ -263,6 +263,18 @@ namespace ClassroomManagementApplication.Models
                 context.SaveChanges();
             }
         }
+
+        public static decimal GenerateBehaviorId()
+        {
+            using (var context = new Entities())
+            {
+                decimal highestId = 0;
+                var previousId = context.BehaviorType.Max(c => c.behaviorID);
+                highestId = previousId + 1;
+                return highestId;
+            }
+
+        }
     }
 
 }
