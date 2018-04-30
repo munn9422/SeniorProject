@@ -1,3 +1,4 @@
+
 ﻿@model ClassroomManagementApplication.Models.IndexViewModel
 @using ClassroomManagementApplication.Models
 <nav class="navbar navbar-inverse sticky-top nav-custom ">
@@ -8,31 +9,6 @@
             <li class="list-inline-item">@Html.ActionLink("About", "About", "Home")</li>
             <li class="list-inline-item">@Html.ActionLink("Contact", "Contact", "Home")</li>
             <li class="list-inline-item">@Html.Partial("../Shared/_LoginPartial")</li>
-            @if (Request.IsAuthenticated)
-            {
-                if (Model.userClassroomRole == "Teacher")
-                {
-                    <ul class="list-inline-item">
-                        @Html.ActionLink("New classroom", "Add", "Classroom")
-                        @foreach (Classroom cr in Model.userClassrooms)
-                        {
-                            //TODO check for null datetime
-                        <li>
-                            @Html.ActionLink(cr.classID.ToString(), "Classroom", "Index")
-                        </li>
-                        }
-                    </ul>
-                }
-                else if (Model.userClassroomRole == "Student")
-                {
-
-                }
-                else if (Model.userClassroomRole == "Parent")
-                {
-
-                }
-            }
         </ul>
-
     </div>
 </nav>

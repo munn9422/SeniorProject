@@ -7,6 +7,7 @@ using System.Web;
 namespace ClassroomManagementApplication.Models
 {
     public class IndexViewModel
+
     {
         public string userClassroomRole { get; set; }
         public string userfname { get; set; }

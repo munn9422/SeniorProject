@@ -182,8 +182,24 @@ namespace ClassroomManagementApplication.Models
                 var query = from c in context.Classroom
                             where c.teacherID == teacherID
                             select c;
-                return query.ToList();
+                var results = query.ToList();
+                if (query.Count() < 1) {
+                    return new List<Models.Classroom>();
+                }
+                else return results;
             }
+        }
+
+        public static decimal GenerateTeacherId()
+        {
+            using (var context = new Entities())
+            {
+                decimal highestId = 0;
+                var previousId = context.Teacher.Max(t => t.TeacherID);
+                highestId = previousId + 1;
+                return highestId;
+            }
+
         }
     }
     public static class ClassroomBinding

@@ -105,6 +105,7 @@ namespace ClassroomManagementApplication.Controllers
                 {
                     var teacher = new Teacher
                     {
+                        TeacherID = UserBinding.GenerateTeacherId(),
                         teacherFirst = fname,
                         teacherLast = lname,
                         UserID = User.Identity.GetUserId(),
