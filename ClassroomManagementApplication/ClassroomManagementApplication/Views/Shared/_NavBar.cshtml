@@ -1,4 +1,4 @@
-﻿@model ClassroomManagementApplication.Models.Classroom
+﻿@model ClassroomManagementApplication.Models.IndexViewModel
 @using ClassroomManagementApplication.Models
 <nav class="navbar navbar-inverse sticky-top nav-custom ">
     <div class="container-fluid">
@@ -12,15 +12,16 @@
             {
                 if (Model.userClassroomRole == "Teacher")
                 {
-                    <li class="list-inline-item">
-                        Classroom
+                    <ul class="list-inline-item">
                         @Html.ActionLink("New classroom", "Add", "Classroom")
                         @foreach (Classroom cr in Model.userClassrooms)
                         {
                             //TODO check for null datetime
-                            @Html.ActionLink(cr.classID.ToString() + "," + cr.semesterStart.Value.ToShortDateString() + "-" + cr.semesterEnd.Value.ToShortDateString() + "Classroom", "Index", )
+                        <li>
+                            @Html.ActionLink(cr.classID.ToString(), "Classroom", "Index")
+                        </li>
                         }
-                    </li>
+                    </ul>
                 }
                 else if (Model.userClassroomRole == "Student")
                 {
