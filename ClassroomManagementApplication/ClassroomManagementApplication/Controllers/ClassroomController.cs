@@ -46,8 +46,8 @@ namespace ClassroomManagementApplication.Controllers
             }
         }
 
-        // GET: Classroom
-        public ActionResult Index()
+        [Authorize]
+        public ActionResult Index(string classcode)
         {
             return View();
         }

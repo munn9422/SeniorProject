@@ -126,7 +126,7 @@ namespace ClassroomManagementApplication.Models
                 List<Student> records = query.ToList();
                 if (records.Count() > 0)
                 {
-                    st = records.FirstOrDefault();
+                    st = records.First();
                 }
             }
             return st;
@@ -157,7 +157,6 @@ namespace ClassroomManagementApplication.Models
             {
                 return null;
             }
-            Teacher te = new Teacher();
             using (var context = new Entities())
             {
                 var query = from t in context.Teacher
@@ -166,10 +165,10 @@ namespace ClassroomManagementApplication.Models
                 List<Teacher> records = query.ToList();
                 if (records.Count() > 0)
                 {
-                    te = records.FirstOrDefault();
+                    return records.First();
                 }
             }
-            return te;
+            return null;
         }
         public static List<Classroom> getTeacherClassrooms(decimal teacherID)
         {
@@ -194,9 +193,8 @@ namespace ClassroomManagementApplication.Models
         {
             using (var context = new Entities())
             {
-                decimal highestId = 0;
-                var previousId = context.Teacher.Max(t => t.TeacherID);
-                highestId = previousId + 1;
+                decimal? previousId = context.Teacher.Max(t => t.TeacherID);
+                decimal highestId = previousId + 1 ?? 0;
                 return highestId;
             }
 
@@ -230,9 +228,8 @@ namespace ClassroomManagementApplication.Models
         {
             using (var context = new Entities())
             {
-                decimal highestId = 0;
-                var previousId = context.Classroom.Max(c => c.classID);
-                highestId = previousId + 1;
+                decimal? previousId = context.Classroom.Max(c => c.classID);
+                decimal highestId = previousId + 1 ?? 0;
                 return highestId;
             }
 
