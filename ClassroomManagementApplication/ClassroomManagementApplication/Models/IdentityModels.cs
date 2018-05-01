@@ -228,11 +228,34 @@ namespace ClassroomManagementApplication.Models
         {
             using (var context = new Entities())
             {
-                decimal? previousId = context.Classroom.Max(c => c.classID);
-                decimal highestId = previousId + 1 ?? 0;
-                return highestId;
+                var query = from c in context.Classroom
+                                    orderby c.classID descending
+                                    select c;
+                List<Classroom> classrooms = query.ToList();
+                if(classrooms.Count < 1)
+                {
+                    return 0;
+                }
+                var largestid = classrooms.First().classID;
+                return ++largestid;
             }
 
+        }
+
+        public static Classroom getClassroom(string classcode)
+        {
+            using (var context = new Entities())
+            {
+                var query = from c in context.Classroom
+                            where c.classCode == classcode
+                            select c;
+                var results = query.ToList();
+                if(results.Count < 1)
+                {
+                    return null;
+                }
+                return results.First();
+            }
         }
     }
 

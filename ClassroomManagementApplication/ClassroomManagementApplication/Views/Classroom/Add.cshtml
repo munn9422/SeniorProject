@@ -19,6 +19,7 @@
 
 
 <h2>Add a new Classroom</h2>
+<h3>@ViewBag.ErrorMessage</h3>
 
 @using (Html.BeginForm("Add", "Classroom", FormMethod.Post))
 {
@@ -27,7 +28,7 @@
 
     <dt>Class Name:</dt>
     <dd>
-        <input name="code" type="text" />
+        <input name="classcode" type="text" />
     </dd>
     <dt>Semester Start:</dt>
     <dd>

@@ -63,20 +63,27 @@ namespace ClassroomManagementApplication.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(DateTime start, DateTime end, string code)
+        public ActionResult Add(DateTime start, DateTime end, string classcode)
         {
             Teacher t = UserBinding.getTeacher(User.Identity.GetUserId());
+
+            if (ClassroomBinding.getClassroom(classcode)?.classID != null)
+            {
+                ViewBag.ErrorMessage = "Error: please enter a unique class code.";
+                return View();
+            }
 
             var classroom = new Classroom
             {
                 classID = ClassroomBinding.GenerateClassId(),
                 semesterStart = start,
                 semesterEnd = end,
-                classCode = code,
+                classCode = classcode,
                 teacherID = t.TeacherID
             };
             ClassroomBinding.SaveRoom(classroom);
-            return View();
+            
+            return RedirectToAction("Index","Home");
         }
     }
 }

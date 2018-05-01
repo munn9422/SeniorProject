@@ -21,9 +21,7 @@ namespace ClassroomManagementApplication.Controllers
         {
             return View();
         }
-
-
-<<<<<<< HEAD
+        
         ////POST: Behavior/Add
         //[HttpPost]
         //[Authorize]
@@ -37,8 +35,8 @@ namespace ClassroomManagementApplication.Controllers
         //        pointValue = point
         //    };
         //}
-=======
-        //POST: Behavior/Add
+
+        //POST: Behavior/Addgit 
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
@@ -55,6 +53,5 @@ namespace ClassroomManagementApplication.Controllers
             BehaviorBinding.SaveBehavior(behavior);
             return View();
         }
->>>>>>> fa92b4a34b4e859d7e0ee46cd8b08a4dce5b079d
     }
 }
