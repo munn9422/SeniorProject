@@ -23,6 +23,7 @@ namespace ClassroomManagementApplication.Controllers
         }
 
 
+<<<<<<< HEAD
         ////POST: Behavior/Add
         //[HttpPost]
         //[Authorize]
@@ -36,5 +37,24 @@ namespace ClassroomManagementApplication.Controllers
         //        pointValue = point
         //    };
         //}
+=======
+        //POST: Behavior/Add
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(string title, string desc, decimal point)
+        {
+            var behavior = new BehaviorType
+            {
+                behaviorID = BehaviorBinding.GenerateBehaviorId(),
+                behaviorTitle = title,
+                behaviorDescription = desc,
+                pointValue = point
+            };
+
+            BehaviorBinding.SaveBehavior(behavior);
+            return View();
+        }
+>>>>>>> fa92b4a34b4e859d7e0ee46cd8b08a4dce5b079d
     }
 }
