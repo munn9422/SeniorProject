@@ -12,14 +12,13 @@
     @Html.Partial("_LoginPartial")
     @if (Request.IsAuthenticated) {
         if (Model.userClassroomRole == "Teacher") {
-            <li class="">
-                Classroom
+            <ul>
                 @Html.ActionLink("New classroom", "Add", "Classroom")
                 @foreach (Classroom cr in Model.userClassrooms) {
                     //TODO check for null datetime
-                    Html.ActionLink(cr.classID.ToString() + "," + cr.semesterStart.Value.ToShortDateString() + "-" + cr.semesterEnd.Value.ToShortDateString() + "Classroom", "Index", cr.classCode);
+                    <li>@Html.ActionLink(cr.classCode.ToString() + ", " + cr.semesterStart.Value.ToShortDateString() + " - " + cr.semesterEnd.Value.ToShortDateString(), "Classroom", "Index", new { id = cr.classCode }, null) </li>
                 }
-            </li>
+            </ul>
         }
         else if (Model.userClassroomRole == "Student") {
 

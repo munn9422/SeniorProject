@@ -47,8 +47,11 @@ namespace ClassroomManagementApplication.Controllers
         }
 
         // GET: Classroom
-        public ActionResult Index()
+        [Authorize]
+        public ActionResult Index(string classcode)
         {
+            Teacher t = UserBinding.getTeacher(User.Identity.GetUserId());
+
             return View();
         }
 
@@ -66,7 +69,7 @@ namespace ClassroomManagementApplication.Controllers
         public ActionResult Add(DateTime start, DateTime end, string code)
         {
             Teacher t = UserBinding.getTeacher(User.Identity.GetUserId());
-
+            //TODO clean parameters
             var classroom = new Classroom
             {
                 classID = ClassroomBinding.GenerateClassId(),
