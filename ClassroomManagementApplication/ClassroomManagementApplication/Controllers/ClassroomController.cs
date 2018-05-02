@@ -40,8 +40,15 @@ namespace ClassroomManagementApplication.Controllers {
         [Authorize]
         public ActionResult Index(string classcode) {
             Teacher t = UserBinding.getTeacher(User.Identity.GetUserId());
+            Classroom cr = ClassroomBinding.getClassroom(classcode);
+            if(cr == null || t ==null)
+            {
+                //TODO add viewbag error?
+                return RedirectToAction("Index", "Home");
+            }
+            
 
-            return View();
+            return View(cr);
         }
 
         // GET: Classroom/Join
