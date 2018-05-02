@@ -106,6 +106,7 @@ namespace ClassroomManagementApplication.Controllers
                 {
                     var student = new Student
                     {
+                        StudentID = UserBinding.GenerateStudentId(),
                         studentFirst = fname,
                         UserID = User.Identity.GetUserId(),
                         studentUsername = User.Identity.GetUserName()
@@ -138,6 +139,7 @@ namespace ClassroomManagementApplication.Controllers
                 {
                     var parent = new Parent
                     {
+                        parentID = UserBinding.GenerateParentId(),
                         parentFirst = fname,
                         UserID = User.Identity.GetUserId(),
                         parentUsername = User.Identity.GetUserName()

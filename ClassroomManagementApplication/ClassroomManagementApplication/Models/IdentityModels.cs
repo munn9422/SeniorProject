@@ -193,9 +193,52 @@ namespace ClassroomManagementApplication.Models
         {
             using (var context = new Entities())
             {
-                decimal? previousId = context.Teacher.Max(t => t.TeacherID);
-                decimal highestId = previousId + 1 ?? 0;
-                return highestId;
+                var query = from t in context.Teacher
+                            orderby t.TeacherID descending
+                            select t;
+                List<Teacher> teachers = query.ToList();
+                if (teachers.Count < 1)
+                {
+                    return 0;
+                }
+                var largestid = teachers.First().TeacherID;
+                return ++largestid;
+            }
+
+        }
+
+        public static decimal GenerateParentId()
+        {
+            using (var context = new Entities())
+            {
+                var query = from p in context.Parent
+                            orderby p.parentID descending
+                            select p;
+                List<Parent> parents = query.ToList();
+                if (parents.Count < 1)
+                {
+                    return 0;
+                }
+                var largestid = parents.First().parentID;
+                return ++largestid;
+            }
+
+        }
+
+        public static decimal GenerateStudentId()
+        {
+            using (var context = new Entities())
+            {
+                var query = from s in context.Student
+                            orderby s.StudentID descending
+                            select s;
+                List<Student> students = query.ToList();
+                if (students.Count < 1)
+                {
+                    return 0;
+                }
+                var largestid = students.First().StudentID;
+                return ++largestid;
             }
 
         }
@@ -288,10 +331,16 @@ namespace ClassroomManagementApplication.Models
         {
             using (var context = new Entities())
             {
-                decimal highestId = 0;
-                var previousId = context.BehaviorType.Max(c => c.behaviorID);
-                highestId = previousId + 1;
-                return highestId;
+                var query = from b in context.BehaviorType
+                            orderby b.behaviorID descending
+                            select b;
+                List<BehaviorType> behaviors = query.ToList();
+                if (behaviors.Count < 1)
+                {
+                    return 0;
+                }
+                var largestid = behaviors.First().behaviorID;
+                return ++largestid;
             }
 
         }
