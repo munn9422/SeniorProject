@@ -74,9 +74,18 @@ namespace ClassroomManagementApplication.Controllers
                 else if (AspNetUser.ClassroomRole == "Teacher")
                 {
                     Teacher teacherUser = UserBinding.getTeacher(AspNetUser.Id);
-                    model.userfname = teacherUser.teacherFirst;
-                    model.userlname = teacherUser.teacherLast;
-                    model.userClassrooms = UserBinding.getTeacherClassrooms(teacherUser.TeacherID);
+                    if (teacherUser == null)
+                    {
+                        //TODO add log?
+                        return View(new IndexViewModel());
+                    }
+                    else
+                    {
+                        model.userfname = teacherUser.teacherFirst;
+                        model.userlname = teacherUser.teacherLast;
+                        model.userClassrooms = UserBinding.getTeacherClassrooms(teacherUser.TeacherID);
+                    }
+                    
                 }
                 return View(model);
             }

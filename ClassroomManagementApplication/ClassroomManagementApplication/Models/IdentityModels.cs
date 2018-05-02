@@ -126,7 +126,7 @@ namespace ClassroomManagementApplication.Models
                 List<Student> records = query.ToList();
                 if (records.Count() > 0)
                 {
-                    st = records.FirstOrDefault();
+                    st = records.First();
                 }
             }
             return st;
@@ -157,7 +157,6 @@ namespace ClassroomManagementApplication.Models
             {
                 return null;
             }
-            Teacher te = new Teacher();
             using (var context = new Entities())
             {
                 var query = from t in context.Teacher
@@ -166,10 +165,10 @@ namespace ClassroomManagementApplication.Models
                 List<Teacher> records = query.ToList();
                 if (records.Count() > 0)
                 {
-                    te = records.FirstOrDefault();
+                    return records.First();
                 }
             }
-            return te;
+            return null;
         }
         public static List<Classroom> getTeacherClassrooms(decimal teacherID)
         {
@@ -194,10 +193,52 @@ namespace ClassroomManagementApplication.Models
         {
             using (var context = new Entities())
             {
-                decimal highestId = 0;
-                var previousId = context.Teacher.Max(t => t.TeacherID);
-                highestId = previousId + 1;
-                return highestId;
+                var query = from t in context.Teacher
+                            orderby t.TeacherID descending
+                            select t;
+                List<Teacher> teachers = query.ToList();
+                if (teachers.Count < 1)
+                {
+                    return 0;
+                }
+                var largestid = teachers.First().TeacherID;
+                return ++largestid;
+            }
+
+        }
+
+        public static decimal GenerateParentId()
+        {
+            using (var context = new Entities())
+            {
+                var query = from p in context.Parent
+                            orderby p.parentID descending
+                            select p;
+                List<Parent> parents = query.ToList();
+                if (parents.Count < 1)
+                {
+                    return 0;
+                }
+                var largestid = parents.First().parentID;
+                return ++largestid;
+            }
+
+        }
+
+        public static decimal GenerateStudentId()
+        {
+            using (var context = new Entities())
+            {
+                var query = from s in context.Student
+                            orderby s.StudentID descending
+                            select s;
+                List<Student> students = query.ToList();
+                if (students.Count < 1)
+                {
+                    return 0;
+                }
+                var largestid = students.First().StudentID;
+                return ++largestid;
             }
 
         }
@@ -230,12 +271,79 @@ namespace ClassroomManagementApplication.Models
         {
             using (var context = new Entities())
             {
-                decimal highestId = 0;
-                var previousId = context.Classroom.Max(c => c.classID);
-                highestId = previousId + 1;
-                return highestId;
+                var query = from c in context.Classroom
+                                    orderby c.classID descending
+                                    select c;
+                List<Classroom> classrooms = query.ToList();
+                if(classrooms.Count < 1)
+                {
+                    return 0;
+                }
+                var largestid = classrooms.First().classID;
+                return ++largestid;
+            }
+
+        }
+
+        public static Classroom getClassroom(string classcode)
+        {
+            using (var context = new Entities())
+            {
+                var query = from c in context.Classroom
+                            where c.classCode == classcode
+                            select c;
+                var results = query.ToList();
+                if(results.Count < 1)
+                {
+                    return null;
+                }
+                return results.First();
+            }
+        }
+    }
+
+    public static class BehaviorBinding
+    {
+        public static void SaveBehavior(BehaviorType bt)
+        {
+
+            using (var context = new Entities())
+            {
+                var recordToUpdate = from b in context.BehaviorType
+                                     where b.behaviorID == bt.behaviorID
+                                     select b;
+
+                List<BehaviorType> records = recordToUpdate.ToList();
+                if (recordToUpdate.Count() > 0)
+                {
+                    BehaviorType old = records.FirstOrDefault();
+                    context.Entry(old).CurrentValues.SetValues(bt);
+                }
+                else
+                {
+                    context.Set<BehaviorType>().Add(bt);
+                }
+                context.SaveChanges();
+            }
+        }
+
+        public static decimal GenerateBehaviorId()
+        {
+            using (var context = new Entities())
+            {
+                var query = from b in context.BehaviorType
+                            orderby b.behaviorID descending
+                            select b;
+                List<BehaviorType> behaviors = query.ToList();
+                if (behaviors.Count < 1)
+                {
+                    return 0;
+                }
+                var largestid = behaviors.First().behaviorID;
+                return ++largestid;
             }
 
         }
     }
+
 }

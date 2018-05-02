@@ -55,6 +55,22 @@ namespace ClassroomManagementApplication.Controllers
             return View();
         }
 
+        // GET: Classroom/Join
+        [Authorize]
+        public ActionResult Join()
+        {
+            return View();
+        }
+
+        // GET: Classroom/Join
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Join(string parameterhere)
+        {
+            return View();
+        }
+
         // GET: Classroom/Add
         [Authorize]
         public ActionResult Add()
@@ -66,20 +82,29 @@ namespace ClassroomManagementApplication.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(DateTime start, DateTime end, string code)
+        public ActionResult Add(DateTime start, DateTime end, string classcode)
         {
             Teacher t = UserBinding.getTeacher(User.Identity.GetUserId());
             //TODO clean parameters
+            if(t == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (ClassroomBinding.getClassroom(classcode)?.classID != null)
+            {
+                ViewBag.ErrorMessage = "Error: please enter a unique class code.";
+                return View();
+            }
             var classroom = new Classroom
             {
                 classID = ClassroomBinding.GenerateClassId(),
                 semesterStart = start,
                 semesterEnd = end,
-                classCode = code,
+                classCode = classcode,
                 teacherID = t.TeacherID
             };
             ClassroomBinding.SaveRoom(classroom);
-            return View();
+            return RedirectToAction("Index","Home");
         }
     }
 }

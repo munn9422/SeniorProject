@@ -3,10 +3,7 @@
 @{
     ViewBag.Title = "Home Page";
 }
-<head>
-    @Styles.Render("~/Content/indexFile.css")
-</head>
-
+@Styles.Render("~/Content/indexFile.css")
 <div class="index-info">
     <h1>Track Student Behavior</h1>
     @Html.Partial("_LoginPartial")
@@ -20,11 +17,22 @@
                 }
             </ul>
         }
-        else if (Model.userClassroomRole == "Student") {
+        if (Request.IsAuthenticated && Model != null) {
+            if (Model.userClassroomRole == "Teacher") {
+                <div class="">
+                    @Html.ActionLink("New classroom", "Add", "Classroom")
+                    @foreach (Classroom cr in Model.userClassrooms) {
+                        //TODO check for null classcode
+                        <p>@Html.ActionLink(cr.classCode, "Classroom", "Index", new { classcode = cr.classCode })</p>
+                    }
+                </div>
+            }
+            else if (Model.userClassroomRole == "Student") {
+                @Html.ActionLink("Join a classroom", "Join", "Classroom")
+            }
+            else if (Model.userClassroomRole == "Parent") {
 
-        }
-        else if (Model.userClassroomRole == "Parent") {
-
+            }
         }
     }
 </div>

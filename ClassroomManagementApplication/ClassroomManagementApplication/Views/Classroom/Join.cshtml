@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Join";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Join a Classroom</h2>
+<h3>@ViewBag.ErrorMessage</h3>
+
+@using (Html.BeginForm("Add", "Classroom", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+
+    <dt>Class Code:</dt>
+    <dd>
+        <input name="classcode" type="text" />
+    </dd>
+    <dt>Semester Start:</dt>
+    <dd>
+        <input name="start" type="text" class="datepicker" />
+    </dd>
+    <dt>Semester End:</dt>
+    <dd>
+        <input name="end" type="text" class="datepicker" />
+    </dd>
+
+    <input type="submit" value="Add Class" />
+}

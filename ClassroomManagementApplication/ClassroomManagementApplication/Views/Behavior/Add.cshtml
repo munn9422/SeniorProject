@@ -1,42 +1,36 @@
-﻿@model ClassroomManagementApplication.Models.Classroom
+﻿@model ClassroomManagementApplication.Models.BehaviorType
 @{
-    ViewBag.Title = "Add a Classroom";
+    ViewBag.Title = "Add a Behavior";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section scripts {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-        $(function () {
-            $(".datepicker").datepicker();
-        });
-    </script>
 
 }
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 
 
-<h2>Add a new Classroom</h2>
-<h3>@ViewBag.ErrorMessage</h3>
+<h2>Add a New Behavior</h2>
 
-@using (Html.BeginForm("Add", "Classroom", FormMethod.Post))
+@using (Html.BeginForm("Add", "Behavior", FormMethod.Post))
 {
 
     @Html.AntiForgeryToken()
 
-    <dt>Class Code:</dt>
+    <dt>Behavior Title:</dt>
     <dd>
-        <input name="classcode" type="text" />
+        <input name="title" type="text" />
     </dd>
-    <dt>Semester Start:</dt>
+    <dt>Behavior Description:</dt>
     <dd>
-        <input name="start" type="text" class="datepicker" />
+        <input name="desc" type="text" />
     </dd>
-    <dt>Semester End:</dt>
+    <dt>Point Value:</dt>
     <dd>
-        <input name="end" type="text" class="datepicker" />
+        <input name="point" type="text" />
     </dd>
 
     <input type="submit" value="Add Class" />
