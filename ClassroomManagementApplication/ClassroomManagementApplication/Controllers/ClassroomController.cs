@@ -50,7 +50,7 @@ namespace ClassroomManagementApplication.Controllers {
             return View();
         }
 
-        // GET: Classroom/Join
+        // POST: Classroom/Join
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -21,20 +21,6 @@ namespace ClassroomManagementApplication.Controllers
         {
             return View();
         }
-        
-        ////POST: Behavior/Add
-        //[HttpPost]
-        //[Authorize]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Add(string title, string desc, decimal point)
-        //{
-        //    var behavior = new BehaviorType
-        //    {
-        //        behaviorTitle = title,
-        //        behaviorDescription = desc,
-        //        pointValue = point
-        //    };
-        //}
 
         //POST: Behavior/Addgit 
         [HttpPost]
