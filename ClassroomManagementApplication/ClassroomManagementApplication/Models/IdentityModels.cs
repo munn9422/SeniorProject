@@ -242,6 +242,21 @@ namespace ClassroomManagementApplication.Models
             }
 
         }
+
+        public static void JoinClass(Student student, string classCode)
+        {
+            using (var context = new Entities())
+            {
+                
+                var query = from c in context.Classroom
+                             where c.classCode == classCode
+                             select c;
+                List<Classroom> classroom = query.ToList();
+
+                student.classID = classroom.First().classID;
+            }
+            
+        }
     }
     public static class ClassroomBinding
     {

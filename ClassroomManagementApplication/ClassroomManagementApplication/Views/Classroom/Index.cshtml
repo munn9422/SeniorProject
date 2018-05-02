@@ -1,8 +1,31 @@
 ﻿@model ClassroomManagementApplication.Models.Classroom
+@using ClassroomManagementApplication.Models
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>@Model.classCode @Model.Teacher.teacherLast</h2>
+<h3>@Model.semesterStart.Value.ToShortDateString() - @Model.semesterEnd.Value.ToShortDateString()</h3>
+
+@if (Model.Student.Count > 0)
+{
+<table>
+    <thead>First Name</thead>
+    <thead>Username</thead>
+    <thead>Points Total</thead>
+    <thead>Add Behavior</thead>
+    @foreach (Student s in Model.Student)
+    {
+        <tr>
+            <td>@s.studentFirst</td>
+            <td>@s.studentUsername</td>
+            <td>@s.totalPoints</td>
+            <td>@Html.ActionLink("","","",null)</td>
+        </tr>
+    }
+</table>
+}
+
+
 
