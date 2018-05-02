@@ -5,51 +5,40 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
 
-namespace ClassroomManagementApplication.Controllers
-{
-    public class ClassroomController : Controller
-    {
+namespace ClassroomManagementApplication.Controllers {
+    public class ClassroomController : Controller {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public ClassroomController()
-        {
+        public ClassroomController() {
         }
 
-        public ClassroomController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
-        {
+        public ClassroomController(ApplicationUserManager userManager, ApplicationSignInManager signInManager) {
             UserManager = userManager;
             SignInManager = signInManager;
         }
 
-        public ApplicationSignInManager SignInManager
-        {
-            get
-            {
+        public ApplicationSignInManager SignInManager {
+            get {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set
-            {
+            private set {
                 _signInManager = value;
             }
         }
 
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
+        public ApplicationUserManager UserManager {
+            get {
                 return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
-            private set
-            {
+            private set {
                 _userManager = value;
             }
         }
 
         // GET: Classroom
         [Authorize]
-        public ActionResult Index(string classcode)
-        {
+        public ActionResult Index(string classcode) {
             Teacher t = UserBinding.getTeacher(User.Identity.GetUserId());
 
             return View();
@@ -57,8 +46,7 @@ namespace ClassroomManagementApplication.Controllers
 
         // GET: Classroom/Join
         [Authorize]
-        public ActionResult Join()
-        {
+        public ActionResult Join() {
             return View();
         }
 
@@ -66,15 +54,13 @@ namespace ClassroomManagementApplication.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Join(string parameterhere)
-        {
+        public ActionResult Join(string parameters) {
             return View();
         }
 
         // GET: Classroom/Add
         [Authorize]
-        public ActionResult Add()
-        {
+        public ActionResult Add() {
             return View();
         }
 
@@ -82,21 +68,17 @@ namespace ClassroomManagementApplication.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(DateTime start, DateTime end, string classcode)
-        {
+        public ActionResult Add(DateTime start, DateTime end, string classcode) {
             Teacher t = UserBinding.getTeacher(User.Identity.GetUserId());
             //TODO clean parameters
-            if(t == null)
-            {
+            if (t == null) {
                 return RedirectToAction("Index", "Home");
             }
-            if (ClassroomBinding.getClassroom(classcode)?.classID != null)
-            {
+            if (ClassroomBinding.getClassroom(classcode)?.classID != null) {
                 ViewBag.ErrorMessage = "Error: please enter a unique class code.";
                 return View();
             }
-            var classroom = new Classroom
-            {
+            var classroom = new Classroom {
                 classID = ClassroomBinding.GenerateClassId(),
                 semesterStart = start,
                 semesterEnd = end,
@@ -104,7 +86,7 @@ namespace ClassroomManagementApplication.Controllers
                 teacherID = t.TeacherID
             };
             ClassroomBinding.SaveRoom(classroom);
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
