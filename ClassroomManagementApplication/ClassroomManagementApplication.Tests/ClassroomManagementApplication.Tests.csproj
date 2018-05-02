@@ -92,12 +92,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ClassroomManagementApplication\ClassroomManagementApplication.csproj">
-      <Project>{F0C04406-37E8-434D-8C15-E4A20013820D}</Project>
-      <Name>ClassroomManagementApplication</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
