@@ -54,7 +54,11 @@ namespace ClassroomManagementApplication.Controllers {
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Join(string parameters) {
+        public ActionResult Join(string classCode) {
+            Student s = UserBinding.getStudent(User.Identity.GetUserId());
+            UserBinding.JoinClass(s, classCode);
+            UserBinding.SaveAccountType(s);
+
             return View();
         }
 
@@ -89,4 +93,6 @@ namespace ClassroomManagementApplication.Controllers {
             return RedirectToAction("Index", "Home");
         }
     }
+
+
 }
