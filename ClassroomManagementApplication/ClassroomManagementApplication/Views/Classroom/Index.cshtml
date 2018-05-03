@@ -5,26 +5,33 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.Classroom.classCode</h2>
-<h1>Teacher: @Model.Teacher.teacherFirst, @Model.Teacher.teacherLast</h1>
-<h3>@Model.Classroom.semesterStart.Value.ToShortDateString() - @Model.Classroom.semesterEnd.Value.ToShortDateString()</h3>
+<h1 class="text-center">Classroom: @Model.Classroom.classCode</h1>
+<p class="text-center">@Model.Classroom.semesterStart.Value.ToShortDateString() - @Model.Classroom.semesterEnd.Value.ToShortDateString()</p>
 
 @if (Model.Students.Count > 0)
 {
-<table>
-    <thead>First Name</thead>
-    <thead>Username</thead>
-    <thead>Points Total</thead>
-    <thead>Add Behavior</thead>
-    @foreach (Student s in Model.Students)
-    {
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
         <tr>
-            <td>@s.studentFirst</td>
-            <td>@s.studentUsername</td>
-            <td>@s.totalPoints</td>
-            @*<td>@Html.ActionLink("","","",null)</td>*@
+            <th>First Name</th>
+            <th>Username</th>
+            <th>Points Total</th>
+            <th>Add Behavior</th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (Student s in Model.Students)
+        {
+            <tr>
+                <td>@s.studentFirst</td>
+                <td>@s.studentUsername</td>
+                <td>@s.totalPoints</td>
+                <td>Add</td>
+            </tr>
+        }
+
+    </tbody>
+    
 </table>
 }
 
