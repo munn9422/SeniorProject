@@ -238,6 +238,7 @@
     <Compile Include="Models\Classroom.cs">
       <DependentUpon>ClassroomManagementModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClassroomBinding.cs" />
     <Compile Include="Models\ClassroomIndexViewModel.cs" />
     <Compile Include="Models\ClassroomManagementModels.Context.cs">
       <AutoGen>True</AutoGen>
@@ -388,6 +389,7 @@
     <Content Include="Views\Classroom\Add.cshtml" />
     <Content Include="Views\Behavior\Add.cshtml" />
     <Content Include="Views\Classroom\Index.cshtml" />
+    <Content Include="Views\Classroom\Join.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

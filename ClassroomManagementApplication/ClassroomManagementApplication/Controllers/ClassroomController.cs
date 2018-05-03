@@ -58,6 +58,8 @@ namespace ClassroomManagementApplication.Controllers {
         // GET: Classroom/Join
         [Authorize]
         public ActionResult Join() {
+
+
             return View();
         }
 
@@ -66,10 +68,14 @@ namespace ClassroomManagementApplication.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Join(string classCode) {
-            Student s = UserBinding.getStudent(User.Identity.GetUserId());
-            UserBinding.JoinClass(s, classCode);
-            UserBinding.SaveAccountType(s);
-
+            var user = User.Identity.GetUserId();
+            Classroom cr = ClassroomBinding.getClassroom(classCode);
+            if(user == null || cr == null || classCode == null)
+            {
+                ViewBag.ErrorMessage = "Error: There was an issue joining a classroom.";
+                return View();
+            }
+            UserBinding.JoinClass(user, classCode);
             return View();
         }
 

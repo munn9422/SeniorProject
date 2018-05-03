@@ -104,14 +104,24 @@ namespace ClassroomManagementApplication.Controllers
             {
                 if (role == "Student")
                 {
-                    var student = new Student
+                    var student = UserBinding.getStudent(User.Identity.GetUserId());
+                    if (student != null)
                     {
-                        StudentID = UserBinding.GenerateStudentId(),
-                        studentFirst = fname,
-                        UserID = User.Identity.GetUserId(),
-                        studentUsername = User.Identity.GetUserName()
-                    };
-                    UserBinding.SaveAccountType(student);
+                        student.studentFirst = fname;
+                        UserBinding.SaveStudent(student);
+                    }
+                    else
+                    {
+                        var newstudent = new Student
+                        {
+                            StudentID = UserBinding.GenerateStudentId(),
+                            studentFirst = fname,
+                            UserID = User.Identity.GetUserId(),
+                            studentUsername = User.Identity.GetUserName()
+                        };
+                        UserBinding.SaveStudent(newstudent);
+                    }
+
                 }
                 else if (role == "Teacher")
                 {
@@ -120,7 +130,7 @@ namespace ClassroomManagementApplication.Controllers
                     {
                         teacher.teacherFirst = fname;
                         teacher.teacherLast = lname;
-                        UserBinding.SaveAccountType(teacher);
+                        UserBinding.SaveTeacher(teacher);
                     }
                     else
                     {
@@ -132,7 +142,7 @@ namespace ClassroomManagementApplication.Controllers
                             UserID = User.Identity.GetUserId(),
                             teacherUsername = User.Identity.GetUserName()
                         };
-                        UserBinding.SaveAccountType(newteacher);
+                        UserBinding.SaveTeacher(newteacher);
                     }
                 }
                 else if (role == "Parent")
@@ -144,7 +154,7 @@ namespace ClassroomManagementApplication.Controllers
                         UserID = User.Identity.GetUserId(),
                         parentUsername = User.Identity.GetUserName()
                     };
-                    UserBinding.SaveAccountType(parent);
+                    UserBinding.SaveParent(parent);
                 }
                 //get logged in user from browser context
                 ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());

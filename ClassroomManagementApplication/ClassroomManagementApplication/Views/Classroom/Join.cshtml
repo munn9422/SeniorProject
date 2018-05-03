@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Join";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -7,15 +6,10 @@
 <h2>Join a Classroom</h2>
 <h3>@ViewBag.ErrorMessage</h3>
 
-@using (Html.BeginForm("Join", "Classroom", FormMethod.Post))
+@using (Html.BeginForm("Join", "Classroom", "FormMethod.Post"))
 {
-
     @Html.AntiForgeryToken()
-
     <dt>Class Code:</dt>
-    <dd>
-        <input name="classcode" type="text" />
-    </dd>
-
-    <input type="submit" value="Join Class" />
+    <dd><input name="classCode" type="text"/></dd>
+    <input type="submit" value="Join Class"/>
 }

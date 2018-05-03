@@ -41,74 +41,76 @@ namespace ClassroomManagementApplication.Models
 
     public static class UserBinding
     {
-        public static void SaveAccountType(object person)
+        public static void SaveStudent(Student student)
         {
-            if (person == null)
+            if (student == null)
             {
                 return;
             }
-            if (person.GetType() == typeof(Student))
+            using (var context = new Entities())
             {
-                Student student = (Student)person;
-                using (var context = new Entities())
+                var recordToUpdate = from s in context.Student
+                                     where s.StudentID == student.StudentID
+                                     select s;
+                List<Student> records = recordToUpdate.ToList();
+                if (recordToUpdate.Count() > 0)
                 {
-                    var recordToUpdate = from s in context.Student
-                                         where s.StudentID == student.StudentID
-                                         select s;
-                    List<Student> records = recordToUpdate.ToList();
-                    if (recordToUpdate.Count() > 0)
-                    {
-                        Student old = records.FirstOrDefault();
-                        context.Entry(old).CurrentValues.SetValues(student);
-                    }
-                    else
-                    {
-                        context.Set<Student>().Add(student);
-                    }
-                    context.SaveChanges();
+                    Student old = records.FirstOrDefault();
+                    context.Entry(old).CurrentValues.SetValues(student);
                 }
+                else
+                {
+                    context.Set<Student>().Add(student);
+                }
+                context.SaveChanges();
             }
-            else if (person.GetType() == typeof(Parent))
+        }
+        public static void SaveParent(Parent parent)
+        {
+            if (parent == null)
             {
-                Parent parent = (Parent)person;
-                using (var context = new Entities())
-                {
-                    var recordToUpdate = from p in context.Parent
-                                         where p.parentID == parent.parentID
-                                         select p;
-                    List<Parent> records = recordToUpdate.ToList();
-                    if (records.Count() > 0)
-                    {
-                        Parent old = records.FirstOrDefault();
-                        context.Entry(old).CurrentValues.SetValues(parent);
-                    }
-                    else
-                    {
-                        context.Set<Parent>().Add(parent);
-                    }
-                    context.SaveChanges();
-                }
+                return;
             }
-            else if (person.GetType() == typeof(Teacher))
+            using (var context = new Entities())
             {
-                Teacher teacher = (Teacher)person;
-                using (var context = new Entities())
+                var recordToUpdate = from p in context.Parent
+                                     where p.parentID == parent.parentID
+                                     select p;
+                List<Parent> records = recordToUpdate.ToList();
+                if (records.Count() > 0)
                 {
-                    var recordToUpdate = from t in context.Teacher
-                                         where t.TeacherID == teacher.TeacherID
-                                         select t;
-                    List<Teacher> records = recordToUpdate.ToList();
-                    if (recordToUpdate.Count() > 0)
-                    {
-                        Teacher old = records.FirstOrDefault();
-                        context.Entry(old).CurrentValues.SetValues(teacher);
-                    }
-                    else
-                    {
-                        context.Set<Teacher>().Add(teacher);
-                    }
-                    context.SaveChanges();
+                    Parent old = records.FirstOrDefault();
+                    context.Entry(old).CurrentValues.SetValues(parent);
                 }
+                else
+                {
+                    context.Set<Parent>().Add(parent);
+                }
+                context.SaveChanges();
+            }
+        }
+        public static void SaveTeacher(Teacher teacher)
+        {
+            if (teacher == null)
+            {
+                return;
+            }
+            using (var context = new Entities())
+            {
+                var recordToUpdate = from t in context.Teacher
+                                     where t.TeacherID == teacher.TeacherID
+                                     select t;
+                List<Teacher> records = recordToUpdate.ToList();
+                if (recordToUpdate.Count() > 0)
+                {
+                    Teacher old = records.FirstOrDefault();
+                    context.Entry(old).CurrentValues.SetValues(teacher);
+                }
+                else
+                {
+                    context.Set<Teacher>().Add(teacher);
+                }
+                context.SaveChanges();
             }
         }
         public static Student getStudent(string UserID)
@@ -182,7 +184,8 @@ namespace ClassroomManagementApplication.Models
                             where c.teacherID == teacherID
                             select c;
                 var results = query.ToList();
-                if (query.Count() < 1) {
+                if (query.Count() < 1)
+                {
                     return new List<Models.Classroom>();
                 }
                 else return results;
@@ -204,7 +207,6 @@ namespace ClassroomManagementApplication.Models
                 var largestid = teachers.First().TeacherID;
                 return ++largestid;
             }
-
         }
 
         public static decimal GenerateParentId()
@@ -222,9 +224,7 @@ namespace ClassroomManagementApplication.Models
                 var largestid = parents.First().parentID;
                 return ++largestid;
             }
-
         }
-
         public static decimal GenerateStudentId()
         {
             using (var context = new Entities())
@@ -240,79 +240,22 @@ namespace ClassroomManagementApplication.Models
                 var largestid = students.First().StudentID;
                 return ++largestid;
             }
-
         }
-
-        public static void JoinClass(Student student, string classCode)
-        {
-            using (var context = new Entities())
-            {
-                
-                var query = from c in context.Classroom
-                             where c.classCode == classCode
-                             select c;
-                List<Classroom> classroom = query.ToList();
-
-                student.classID = classroom.First().classID;
-            }
-            
-        }
-    }
-    public static class ClassroomBinding
-    {
-        public static void SaveRoom(Classroom cl)
+        public static void JoinClass(string studentUserID, string classCode)
         {
 
             using (var context = new Entities())
             {
-                var recordToUpdate = from c in context.Classroom
-                                     where c.classCode == cl.classCode
-                                     select c;
-
-                List<Classroom> records = recordToUpdate.ToList();
-                if (recordToUpdate.Count() > 0)
-                {
-                    Classroom old = records.FirstOrDefault();
-                    context.Entry(old).CurrentValues.SetValues(cl);
-                }
-                else
-                {
-                    context.Set<Classroom>().Add(cl);
-                }
+                var studentquery = from s in context.Student
+                                   where s.UserID == studentUserID
+                                   select s;
+                var classquery = from cr in context.Classroom
+                                 where cr.classCode == classCode
+                                 select cr;
+                Student stu = studentquery.First();
+                Classroom clroom = classquery.First();
+                stu.Classroom = clroom;
                 context.SaveChanges();
-            }
-        }
-        public static decimal GenerateClassId()
-        {
-            using (var context = new Entities())
-            {
-                var query = from c in context.Classroom
-                                    orderby c.classID descending
-                                    select c;
-                List<Classroom> classrooms = query.ToList();
-                if(classrooms.Count < 1)
-                {
-                    return 0;
-                }
-                var largestid = classrooms.First().classID;
-                return ++largestid;
-            }
-
-        }
-
-        public static Classroom getClassroom(string classcode)
-        {
-            using (var context = new Entities())
-            {
-                var query = (from c in context.Classroom
-                            where c.classCode == classcode
-                            select c).Include("Student").Include("Teacher").Include("BehaviorType");
-                var results = query.ToList();
-                if(results.Count < 1)
-                {
-                    return null;
-                }
-                return results.First();
             }
         }
     }
