@@ -273,6 +273,7 @@
     <Compile Include="Models\Teacher.cs">
       <DependentUpon>ClassroomManagementModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserBinding.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
