@@ -260,7 +260,6 @@ namespace ClassroomManagementApplication.Models
                                     select t;
                     points = points + typeQuery.First().pointValue;
                 }
-
                 return points;
             }
         }

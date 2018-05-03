@@ -11,21 +11,21 @@
 
 @if (Model.Students.Count > 0)
 {
-<table>
-    <thead>First Name</thead>
-    <thead>Username</thead>
-    <thead>Points Total</thead>
-    <thead>Add Behavior</thead>
-    @foreach (Student s in Model.Students)
-    {
-        <tr>
-            <td>@s.studentFirst</td>
-            <td>@s.studentUsername</td>
-            <td>@s.totalPoints</td>
-            @*<td>@Html.ActionLink("","","",null)</td>*@
-        </tr>
-    }
-</table>
+    <table>
+        <thead>First Name</thead>
+        <thead>Username</thead>
+        <thead>Points Total</thead>
+        <thead>Add Behavior</thead>
+        @foreach (Student s in Model.Students)
+        {
+            <tr>
+                <td>@s.studentFirst</td>
+                <td>@s.studentUsername</td>
+                <td>@s.totalPoints</td>
+                <td>@Html.ActionLink("Add", "Add", "Behavior", null)</td>
+            </tr>
+        }
+    </table>
 }
 
 

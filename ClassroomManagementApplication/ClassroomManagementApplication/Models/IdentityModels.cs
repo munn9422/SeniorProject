@@ -39,8 +39,6 @@ namespace ClassroomManagementApplication.Models
         }
     }
 
-   
-
     public static class BehaviorBinding
     {
         public static void SaveBehavior(BehaviorType bt)

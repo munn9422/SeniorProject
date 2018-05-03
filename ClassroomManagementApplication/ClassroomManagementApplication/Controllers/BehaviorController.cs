@@ -22,11 +22,27 @@ namespace ClassroomManagementApplication.Controllers
             return View();
         }
 
-        //POST: Behavior/Addgit 
+        //POST: Behavior/Add
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(string title, string desc, decimal point)
+        public ActionResult Add(string someparameters)
+        {
+
+        }
+
+        //GET: Behavior/AddType
+        [Authorize]
+        public ActionResult AddType()
+        {
+            return View();
+        }
+
+        //POST: Behavior/AddType
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddType(string title, string desc, decimal point)
         {
             var behavior = new BehaviorType
             {
@@ -37,22 +53,6 @@ namespace ClassroomManagementApplication.Controllers
             };
 
             BehaviorBinding.SaveBehavior(behavior);
-            return View();
-        }
-
-        //GET: Behavior/Performed
-        [Authorize]
-        public ActionResult AddPerformed()
-        {
-            return View();
-        }
-
-        //POST: Behavior/Performed
-        [HttpPost]
-        [Authorize]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddPerformed(string studentID)
-        {
             return View();
         }
     }
