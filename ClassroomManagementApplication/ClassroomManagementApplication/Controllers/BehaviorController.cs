@@ -39,5 +39,21 @@ namespace ClassroomManagementApplication.Controllers
             BehaviorBinding.SaveBehavior(behavior);
             return View();
         }
+
+        //GET: Behavior/Performed
+        [Authorize]
+        public ActionResult AddPerformed()
+        {
+            return View();
+        }
+
+        //POST: Behavior/Performed
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddPerformed(string studentID)
+        {
+            return View();
+        }
     }
 }
