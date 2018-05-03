@@ -41,7 +41,7 @@ namespace ClassroomManagementApplication.Controllers {
         [Authorize]
         public ActionResult Index(string classcode) {
             Teacher t = UserBinding.getTeacher(User.Identity.GetUserId());
-            Classroom cr = ClassroomBinding.getClassroom(classcode);
+            Classroom cr = ClassroomBinding.GetClassroomFromCode(classcode);
             if(cr == null || t == null || classcode == null)
             {
                 //TODO add viewbag error?
@@ -69,7 +69,7 @@ namespace ClassroomManagementApplication.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Join(string classCode) {
             var user = User.Identity.GetUserId();
-            Classroom cr = ClassroomBinding.getClassroom(classCode);
+            Classroom cr = ClassroomBinding.GetClassroomFromCode(classCode);
             if(user == null || cr == null || classCode == null)
             {
                 ViewBag.ErrorMessage = "Error: There was an issue joining a classroom.";
@@ -95,7 +95,7 @@ namespace ClassroomManagementApplication.Controllers {
             if (t == null) {
                 return RedirectToAction("Index", "Home");
             }
-            if (ClassroomBinding.getClassroom(classcode)?.classID != null) {
+            if (ClassroomBinding.GetClassroomFromCode(classcode)?.classID != null) {
                 ViewBag.ErrorMessage = "Error: please enter a unique class code.";
                 return View();
             }

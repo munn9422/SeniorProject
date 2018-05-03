@@ -22,11 +22,18 @@
         }
         else if (Model.userClassroomRole == "Student")
         {
-            @Html.ActionLink("Join a classroom", "Join", "Classroom")
+            if (Model.userClassrooms == null)
+            {
+                <p>@Html.ActionLink("Join a classroom", "Join", "Classroom")</p>
+            }
+            else
+            {
+                <p>@Html.ActionLink("Student Page","Index","Student")</p>
+            }
         }
         else if (Model.userClassroomRole == "Parent")
         {
-           
+
         }
     }
 </div>
