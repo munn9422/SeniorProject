@@ -48,12 +48,35 @@ namespace ClassroomManagementApplication.Models
 
         }
 
-        public static Classroom getClassroom(string classcode)
+        public static Classroom GetClassroomFromCode(string classcode)
         {
+            if(classcode == null)
+            {
+                return null;
+            }
             using (var context = new Entities())
             {
                 var query = (from c in context.Classroom
                              where c.classCode == classcode
+                             select c).Include("Student").Include("Teacher").Include("BehaviorType");
+                var results = query.ToList();
+                if (results.Count < 1)
+                {
+                    return null;
+                }
+                return results.First();
+            }
+        }
+        public static Classroom GetClassroomFromID(decimal? classID)
+        {
+            if (classID == null)
+            {
+                return null;
+            }
+            using (var context = new Entities())
+            {
+                var query = (from c in context.Classroom
+                             where c.classID == classID
                              select c).Include("Student").Include("Teacher").Include("BehaviorType");
                 var results = query.ToList();
                 if (results.Count < 1)

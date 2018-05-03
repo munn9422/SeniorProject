@@ -62,9 +62,17 @@ namespace ClassroomManagementApplication.Controllers
                 if (AspNetUser.ClassroomRole == "Student")
                 {
                     Student studentUser = UserBinding.getStudent(AspNetUser.Id);
+                    if (studentUser == null)
+                    {
+                        return View(new IndexViewModel());
+                    }
                     model.userfname = studentUser.studentFirst;
-                    model.userClassrooms = new List<Classroom>();
-                    model.userClassrooms.Add(studentUser.Classroom);
+                    if (studentUser.classID == null)
+                    {
+                        model.userClassrooms = null;
+                        return View(model);
+                    }
+                    model.userClassrooms.Add(ClassroomBinding.GetClassroomFromID(studentUser.classID));
                 }
                 else if (AspNetUser.ClassroomRole == "Parent")
                 {
@@ -79,13 +87,10 @@ namespace ClassroomManagementApplication.Controllers
                         //TODO add log?
                         return View(new IndexViewModel());
                     }
-                    else
-                    {
-                        model.userfname = teacherUser.teacherFirst;
-                        model.userlname = teacherUser.teacherLast;
-                        model.userClassrooms = UserBinding.getTeacherClassrooms(teacherUser.TeacherID);
-                    }
-                    
+                    model.userfname = teacherUser.teacherFirst;
+                    model.userlname = teacherUser.teacherLast;
+                    model.userClassrooms = UserBinding.getTeacherClassrooms(teacherUser.TeacherID);
+
                 }
                 return View(model);
             }
