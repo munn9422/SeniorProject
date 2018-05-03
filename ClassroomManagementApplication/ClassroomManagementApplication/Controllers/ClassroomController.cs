@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
+using System.Linq;
 
 namespace ClassroomManagementApplication.Controllers {
     public class ClassroomController : Controller {
@@ -36,19 +37,22 @@ namespace ClassroomManagementApplication.Controllers {
             }
         }
 
-        // GET: Classroom
+        // GET: Classroom?classcode={classcode}
         [Authorize]
         public ActionResult Index(string classcode) {
             Teacher t = UserBinding.getTeacher(User.Identity.GetUserId());
             Classroom cr = ClassroomBinding.getClassroom(classcode);
-            if(cr == null || t ==null)
+            if(cr == null || t == null || classcode == null)
             {
                 //TODO add viewbag error?
                 return RedirectToAction("Index", "Home");
             }
-            
+            ClassroomIndexViewModel model = new ClassroomIndexViewModel();
+            model.Classroom = cr;
+            model.Teacher = t;
+            model.Students = cr.Student.ToList();
 
-            return View(cr);
+            return View(model);
         }
 
         // GET: Classroom/Join

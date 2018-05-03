@@ -238,6 +238,7 @@
     <Compile Include="Models\Classroom.cs">
       <DependentUpon>ClassroomManagementModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClassroomIndexViewModel.cs" />
     <Compile Include="Models\ClassroomManagementModels.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

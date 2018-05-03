@@ -304,9 +304,9 @@ namespace ClassroomManagementApplication.Models
         {
             using (var context = new Entities())
             {
-                var query = from c in context.Classroom
+                var query = (from c in context.Classroom
                             where c.classCode == classcode
-                            select c;
+                            select c).Include("Student").Include("Teacher").Include("BehaviorType");
                 var results = query.ToList();
                 if(results.Count < 1)
                 {
