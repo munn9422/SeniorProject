@@ -279,5 +279,19 @@ namespace ClassroomManagementApplication.Models
             }
 
         }
+
+        public static List<BehaviorPerformed> PrintPerformed(decimal studID)
+        {
+            using (var context = new Entities())
+            {
+                var query = from b in context.BehaviorPerformed
+                            where b.studentID == studID
+                            select b;
+
+                List<BehaviorPerformed> behaviors = query.ToList();
+                return behaviors;
+            }
+
+        }
     }
 }

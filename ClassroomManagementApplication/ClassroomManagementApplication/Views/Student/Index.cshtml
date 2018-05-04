@@ -1,17 +1,27 @@
 ﻿@model ClassroomManagementApplication.Models.ClassroomIndexViewModel
 @using ClassroomManagementApplication.Models
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin;
+@using Microsoft.Owin.Security;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var student = UserBinding.getStudent(User.Identity.GetUserId());
 }
 
 <div>
     <h1 class="text-center">Student: @User.Identity.Name</h1>
-    <h2 class="text-center">Points: </h2>
+    <h2 class="text-center">Points: @UserBinding.GetPoints(student.StudentID) </h2>
 </div>
 
 <div>
     <p>Behvaior Log:</p>
+
+    @foreach (BehaviorPerformed b in UserBinding.PrintPerformed(student.StudentID))
+    {
+       <p>@b.BehaviorType</p>
+    }
     <button>Request Prize</button>
 </div>
 
