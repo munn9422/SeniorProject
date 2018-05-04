@@ -1,9 +1,8 @@
-﻿@{
+﻿@model ClassroomManagementApplication.Models.AddTypeViewModel
+@{
     ViewBag.Title = "Add a Behavior";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
 <h2>Add a New Behavior Type to the Rubric</h2>
 
 @using (Html.BeginForm("AddType", "Behavior", FormMethod.Post))
@@ -13,16 +12,19 @@
 
     <dt>Behavior Title:</dt>
     <dd>
-        <input name="title" type="text" />
+        @Html.TextBoxFor(m => m.Title)
+
     </dd>
     <dt>Behavior Description:</dt>
     <dd>
-        <input name="desc" type="text" />
+        @Html.TextBoxFor(m => m.Description)
+
     </dd>
     <dt>Point Value:</dt>
     <dd>
-        <input name="point" type="text" />
+        @Html.TextBoxFor(m => m.PointValue)
     </dd>
+    @Html.HiddenFor(m => m.ClassCode);
 
     <input type="submit" value="Add Behavior" />
 }
