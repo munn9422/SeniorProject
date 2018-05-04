@@ -286,6 +286,21 @@ namespace ClassroomManagementApplication.Models
 
         }
 
+        public static List<BehaviorType> BPIDtoDescription(decimal id)
+        {
+            using (var context = new Entities())
+            {
+                var typeQuery = from t in context.BehaviorType
+                                where t.behaviorID == id
+                                select t;
+
+                List<BehaviorType> behaviors = typeQuery.ToList();
+                return behaviors;
+            }
+            
+                
+        }
+
         public static List<BehaviorPerformed> PrintPerformed(decimal studID)
         {
             using (var context = new Entities())

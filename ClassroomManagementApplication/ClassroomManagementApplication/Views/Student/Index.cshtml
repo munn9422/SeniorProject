@@ -8,6 +8,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     var student = UserBinding.getStudent(User.Identity.GetUserId());
+    int i = 0;
 }
 
 <div>
@@ -20,7 +21,8 @@
 
     @foreach (BehaviorPerformed b in UserBinding.PrintPerformed(student.StudentID))
     {
-       <p>@b.BehaviorType</p>
+       <p>@UserBinding.BPIDtoDescription(b.BPID)[i].behaviorDescription</p>
+        i++;
     }
     <button>Request Prize</button>
 </div>
