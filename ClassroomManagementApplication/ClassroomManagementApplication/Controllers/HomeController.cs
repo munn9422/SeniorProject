@@ -72,6 +72,7 @@ namespace ClassroomManagementApplication.Controllers
                         model.userClassrooms = null;
                         return View(model);
                     }
+                    model.userClassrooms = new List<Classroom>();
                     model.userClassrooms.Add(ClassroomBinding.GetClassroomFromID(studentUser.classID));
                 }
                 else if (AspNetUser.ClassroomRole == "Parent")

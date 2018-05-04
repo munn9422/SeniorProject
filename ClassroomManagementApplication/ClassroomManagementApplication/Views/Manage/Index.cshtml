@@ -6,14 +6,17 @@
         function hideLast() {
             if ($("#role").val() == "Student") {
                 $("#lastName").hide();
+                $("#lnametextbox").removeAttr('required');
             };
         };
         $("#role").change(function () {
             if ($("#role").val() != "Student") {
                 $("#lastName").show();
+                $("#lnametextbox").attr('required')
             }
             else {
                 $("#lastName").hide();
+                $("#lnametextbox").removeAttr('required');
             };
         });
         hideLast();
@@ -56,13 +59,13 @@
 
             <dt>First Name</dt>
             <dd>
-                <input type="text" name="fname" value="@Model.userfname" placeholder="First Name" required />
+                <input type="text" id="fnametextbox" name="fname" value="@Model.userfname" placeholder="First Name" required />
             </dd>
 
             <div id="lastName">
                 <dt>Last Name</dt>
                 <dd>
-                    <input type="text" name="lname" value="@Model.userlname" placeholder="Last Name" required />
+                    <input type="text" id="lnametextbox" name="lname" value="@Model.userlname" placeholder="Last Name" required />
                 </dd>
             </div>
 

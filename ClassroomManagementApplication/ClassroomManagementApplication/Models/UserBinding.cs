@@ -248,8 +248,8 @@ namespace ClassroomManagementApplication.Models
             using (var context = new Entities())
             {
                 var performedQuery = from b in context.BehaviorPerformed
-                             where b.studentID == studId
-                             select b;
+                                     where b.studentID == studId
+                                     select b;
                 List<BehaviorPerformed> behaviors = performedQuery.ToList();
 
                 decimal? points = 0;

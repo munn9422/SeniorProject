@@ -28,7 +28,7 @@ namespace ClassroomManagementApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Add(string someparameters)
         {
-
+            return View();
         }
 
         //GET: Behavior/AddType

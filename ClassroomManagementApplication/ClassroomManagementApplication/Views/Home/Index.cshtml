@@ -12,11 +12,11 @@
         if (Model.userClassroomRole == "Teacher")
         {
             <div class="">
-                <button class="btn btn-outline-secondary">@Html.ActionLink("New classroom", "Add", "Classroom", new { @style="color: black"})</button>
+                @Html.ActionLink("New classroom", "Add", "Classroom", null, new { @style="color: black"})
                 @foreach (Classroom cr in Model.userClassrooms)
                 {
                     //TODO check for null classcode
-                   <p>@Html.ActionLink(cr.classCode, "Index", "Classroom", new { classcode = cr.classCode }, null)</p>
+                   <p>@Html.ActionLink(cr.classCode, "Index", "Classroom", new { classcode = cr.classCode }, new { @style="color:black"})</p>
                 }
             </div>
         }
