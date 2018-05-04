@@ -26,10 +26,10 @@ namespace ClassroomManagementApplication.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(string someparameters)
-        {
+        //public ActionResult Add(string someparameters)
+        //{
 
-        }
+        //}
 
         //GET: Behavior/AddType
         [Authorize]
