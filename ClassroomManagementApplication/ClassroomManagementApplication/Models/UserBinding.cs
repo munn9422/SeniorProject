@@ -85,7 +85,6 @@ namespace ClassroomManagementApplication.Models
             {
                 return null;
             }
-            Student st = new Student();
             using (var context = new Entities())
             {
                 var query = from s in context.Student
@@ -94,10 +93,10 @@ namespace ClassroomManagementApplication.Models
                 List<Student> records = query.ToList();
                 if (records.Count() > 0)
                 {
-                    st = records.First();
+                    return records.First();
                 }
             }
-            return st;
+            return null;
         }
         public static Parent getParent(string UserID)
         {
@@ -236,6 +235,13 @@ namespace ClassroomManagementApplication.Models
                 var classquery = from cr in context.Classroom
                                  where cr.classCode == classCode
                                  select cr;
+                List<Student> studentsreturned = studentquery.ToList();
+                List<Classroom> classroomsreturned = classquery.ToList();
+                if(studentsreturned.Count < 1 || classroomsreturned.Count < 1)
+                { 
+                    //TODO error code
+                    return;
+                }
                 Student stu = studentquery.First();
                 Classroom clroom = classquery.First();
                 stu.Classroom = clroom;
