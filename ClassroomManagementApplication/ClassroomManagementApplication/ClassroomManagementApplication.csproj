@@ -230,6 +230,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddTypeViewModel.cs" />
     <Compile Include="Models\BehaviorPerformed.cs">
       <DependentUpon>ClassroomManagementModels.tt</DependentUpon>
     </Compile>

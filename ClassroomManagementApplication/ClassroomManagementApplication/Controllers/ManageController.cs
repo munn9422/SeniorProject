@@ -66,7 +66,10 @@ namespace ClassroomManagementApplication.Controllers
             if (AspNetUser.ClassroomRole == "Student")
             {
                 Student studentUser = UserBinding.getStudent(AspNetUser.Id);
-                //TODO null check
+                if(studentUser == null)
+                {
+                    studentUser = new Student();
+                }
                 model.userfname = studentUser.studentFirst;
             }
             else if (AspNetUser.ClassroomRole == "Parent")

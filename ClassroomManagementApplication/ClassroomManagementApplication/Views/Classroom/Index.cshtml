@@ -9,6 +9,8 @@
 <h1>Teacher: @Model.Teacher.teacherLast, @Model.Teacher.teacherFirst</h1>
 <h3>@Model.Classroom.semesterStart.Value.ToShortDateString() - @Model.Classroom.semesterEnd.Value.ToShortDateString()</h3>
 
+<h4>@Html.ActionLink("Add a new behavior type to the rubric", "AddType", "Behavior", new { classcode = Model.Classroom.classCode }, null)</h4>
+
 @if (Model.Students.Count > 0)
 {
 <table>
