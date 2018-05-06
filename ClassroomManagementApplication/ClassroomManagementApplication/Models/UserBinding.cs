@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 
 namespace ClassroomManagementApplication.Models
 {
@@ -314,6 +317,40 @@ namespace ClassroomManagementApplication.Models
                 return behaviors;
             }
 
+        }
+
+        public static decimal GenerateRequestId()
+        {
+            using (var context = new Entities())
+            {
+                var query = from p in context.PrizeRequest
+                            orderby p.requestID descending
+                            select p;
+                List<PrizeRequest> requests = query.ToList();
+                if (requests.Count < 1)
+                {
+                    return 0;
+                }
+                var largestid = requests.First().requestID;
+                return ++largestid;
+            }
+
+        }
+        public static void RequestPrize(decimal studID, DateTime date)
+        {
+            using (var context = new Entities())
+            {
+                var prize = new PrizeRequest
+                {
+                    requestID = GenerateRequestId(),
+                    dateRequested = date,
+                    studentID = studID
+
+
+                };
+                context.Set<PrizeRequest>().Add(prize);
+                context.SaveChanges();
+            }
         }
     }
 }

@@ -100,5 +100,25 @@ namespace ClassroomManagementApplication.Models
                 return results.First();
             }
         }
+
+        public static Boolean IsRequested(decimal stuID)
+        {
+            using (var context = new Entities())
+            {
+                var query = from p in context.PrizeRequest
+                            where p.studentID == stuID
+                            select p;
+                List<PrizeRequest> prizes = query.ToList();
+                if(prizes.Count < 1)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+                
+            }
+        }
     }
 }

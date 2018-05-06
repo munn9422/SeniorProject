@@ -10,6 +10,19 @@
     var student = UserBinding.getStudent(User.Identity.GetUserId());
     int i = 0;
 }
+@section scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $(".datepicker").datepicker();
+        });
+    </script>
+
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
 
 <div>
     <h1 class="text-center">Student: @User.Identity.Name</h1>
@@ -35,9 +48,14 @@
         </tbody>
 
     </table>
+    @using (Html.BeginForm("Index", "Student", FormMethod.Post))
+    {
 
-    
-    <input type="submit"  >Request Prize</input>
+        @Html.AntiForgeryToken()
+
+        <input name="date" type="text" class="datepicker" />
+        <input type="submit" value="Request Prize">
+    }
 </div>
 
 

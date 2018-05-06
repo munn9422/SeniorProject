@@ -1,8 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using ClassroomManagementApplication.Models;
+using System;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
+using System.Linq;
 
 namespace ClassroomManagementApplication.Controllers
 {
@@ -17,9 +19,10 @@ namespace ClassroomManagementApplication.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-
-        public ActionResult Index(decimal studID)
+        public ActionResult Index(DateTime date)
         {
+            Student s = UserBinding.getStudent(User.Identity.GetUserId());
+            UserBinding.RequestPrize(s.StudentID, date);
             return View();
         }
     }
