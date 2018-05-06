@@ -6,7 +6,6 @@
 @Styles.Render("~/Content/indexFile.css")
 <div class="index-info">
     <h1>Track Student Behavior</h1>
-    @Html.Partial("_LoginPartial")
     @if (Request.IsAuthenticated && Model != null)
     {
         if (Model.userClassroomRole == "Teacher")

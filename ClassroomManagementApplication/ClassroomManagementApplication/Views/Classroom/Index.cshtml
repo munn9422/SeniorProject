@@ -25,7 +25,7 @@
                 <tr>
                     <td>@s.studentFirst</td>
                     <td>@s.studentUsername</td>
-                    <td>@s.totalPoints</td>
+                    <td>@UserBinding.GetPoints(s.StudentID)</td>
                     <td>@ClassroomBinding.IsRequested(s.StudentID)</td>
                     <td>@Html.ActionLink("Add Behavior", "Add", "Behavior", new { studentuserID = s.UserID, classcode = Model.Classroom.classCode }, new { @style = "color:black" })</td>
                 </tr>
