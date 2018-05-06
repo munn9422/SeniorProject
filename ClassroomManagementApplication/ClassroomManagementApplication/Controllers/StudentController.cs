@@ -13,5 +13,14 @@ namespace ClassroomManagementApplication.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+
+        public ActionResult Index(decimal studID)
+        {
+            return View();
+        }
     }
 }
