@@ -16,6 +16,7 @@
                 <th>First Name</th>
                 <th>Username</th>
                 <th>Points Total</th>
+                <th>Prize Requested</th>
                 <th>Add Behavior</th>
             </tr>
         </thead>
@@ -26,6 +27,7 @@
                     <td>@s.studentFirst</td>
                     <td>@s.studentUsername</td>
                     <td>@s.totalPoints</td>
+                    <td>@ClassroomBinding.IsRequested(s.StudentID)</td>
                     <td>@Html.ActionLink("Add Behavior", "Add", "Behavior", null, new { @style = "color:black" })</td>
                 </tr>
             }
