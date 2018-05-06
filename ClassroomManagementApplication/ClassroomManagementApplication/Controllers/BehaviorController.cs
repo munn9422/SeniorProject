@@ -1,9 +1,11 @@
 ﻿using ClassroomManagementApplication.Models;
 using System;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
+using System.Collections.Generic;
 
 namespace ClassroomManagementApplication.Controllers
 {
@@ -46,26 +48,55 @@ namespace ClassroomManagementApplication.Controllers
             }
         }
 
-        // GET: Behavior
-        public ActionResult Index()
-        {
-            return View();
-        }
+        //// GET: Behavior
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
 
         //GET: Behavior/Add
         [Authorize]
-        public ActionResult Add()
+        public ActionResult Add(string studentuserID, string classcode)
         {
-            return View();
+            if (classcode == null ) {
+                //error message
+                return RedirectToAction("Classroom", "Index", new {classcode = classcode});
+            }
+            Classroom cr = ClassroomBinding.GetClassroomFromCode(classcode);
+            if(cr == null) {
+                //error message
+                return RedirectToAction("Classroom", "Index", new { classcode = classcode });
+            }
+
+            NewBehaviorViewModel model = new NewBehaviorViewModel() {
+                ClassCode = classcode,
+                StudentUserID = User.Identity.GetUserId()
+            };
+            model.BehaviorTypes = new List<SelectListItem>();
+            List<BehaviorType> bts = cr.BehaviorType.ToList();
+            foreach (BehaviorType bt in bts) {
+                model.BehaviorTypes.Add(new SelectListItem { Text = bt.behaviorTitle, Value = bt.behaviorID.ToString()});
+            }
+            return View(model);
         }
 
         //POST: Behavior/Add
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(string someparameters)
+        public ActionResult Add(NewBehaviorViewModel model, FormCollection form)
         {
-            return View();
+            if (!ModelState.IsValid || model.DatePerformed == null || model.BehaviorTypePerformedID == null) {
+                return RedirectToAction("Home", "Index");
+            }
+            Student student = UserBinding.getStudent(model.StudentUserID);
+            if(student.classID == null) {
+                return RedirectToAction("Home", "Index");
+            }
+
+            BehaviorType bt = ClassroomBinding.GetBehaviorType((decimal)student.classID, Convert.ToDecimal(model.BehaviorTypePerformedID));
+            UserBinding.AddBehaviorToStudent(student, bt, model.DatePerformed);
+            return RedirectToAction("Index","Classroom", new { classcode = ClassroomBinding.GetClassroomFromID(student.classID).classCode });
         }
 
         //GET: Behavior/AddType

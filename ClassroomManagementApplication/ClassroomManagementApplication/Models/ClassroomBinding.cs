@@ -48,6 +48,20 @@ namespace ClassroomManagementApplication.Models
 
         }
 
+        public static BehaviorType GetBehaviorType(decimal classid, decimal behaviorid){
+            using (var context = new Entities()) {
+                var query = from bt in context.BehaviorType
+                            where bt.classID == classid && bt.behaviorID == behaviorid
+                            select bt;
+                List<BehaviorType> bts = query.ToList();
+                if(bts.Count < 1) {
+                    return null;
+                }
+                return bts.First();
+            }
+
+        }
+
         public static Classroom GetClassroomFromCode(string classcode)
         {
             if(classcode == null)

@@ -8,28 +8,31 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $(".datepicker").datepicker();
+        });
+    </script>
 }
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 
 <h2>Record a new behavior </h2>
 
-@using (Html.BeginForm("Add", "Behavior", FormMethod.Post))
-{
+@using (Html.BeginForm("Add", "Behavior", FormMethod.Post)) {
     @Html.AntiForgeryToken()
 
+    @Html.HiddenFor(m => m.StudentUserID);
+    @Html.HiddenFor(m => m.ClassCode);
     <dt>Date of Occurence</dt>
-    <dd> <input name="bpdate" type="text" class="datepicker" /></dd>
-
-    <dt>Select which behavior</dt>
     <dd>
-        <select>
-            @foreach (BehaviorType bt in Model.BehaviorTypeList)
-            {
-                <option>@bt.behaviorTitle, @bt.pointValue.ToString()</option>
-            }
-        </select>
+        @Html.TextBoxFor(m => m.DatePerformed, new { @class = "datepicker" })
     </dd>
 
-<input type="submit" value="Record Behavior" />
+    <dt>Select which behavior:</dt>
+    <dd>
+        @Html.DropDownListFor(m => m.BehaviorTypePerformedID, Model.BehaviorTypes)
+    </dd>
+
+    <input type="submit" value="Record Behavior" />
 }

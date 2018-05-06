@@ -26,7 +26,7 @@
                     <td>@s.studentFirst</td>
                     <td>@s.studentUsername</td>
                     <td>@s.totalPoints</td>
-                    <td>@Html.ActionLink("Add Behavior", "Add", "Behavior", null, new { @style = "color:black" })</td>
+                    <td>@Html.ActionLink("Add Behavior", "Add", "Behavior", new { studentid = s.StudentID, classcode = Model.Classroom.classCode }, new { @style = "color:black" })</td>
                 </tr>
             }
 

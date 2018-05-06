@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Web.Mvc;
 
 namespace ClassroomManagementApplication.Models
 {
     public class NewBehaviorViewModel
     {
-        public List<BehaviorType> BehaviorTypeList { get; set; }
-        public Student Student { get; set; }
-        public Teacher Teacher { get; set; }
-        public Classroom Classroom { get; set; }
+        public List<SelectListItem> BehaviorTypes { get; set; }
+        public string BehaviorTypePerformedID { get; set; }
+        public DateTime DatePerformed { get; set; }
+        public string StudentUserID { get; set; }
+        public string ClassCode { get; set; }
     }
 }

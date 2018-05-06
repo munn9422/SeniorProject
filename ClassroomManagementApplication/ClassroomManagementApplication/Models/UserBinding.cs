@@ -270,17 +270,18 @@ namespace ClassroomManagementApplication.Models
             }
         }
 
-        public static void AddBehaviorToStudent(Student s, BehaviorType b)
+        public static void AddBehaviorToStudent(Student s, BehaviorType b, DateTime date)
         {
             using (var context = new Entities())
             {
                 BehaviorPerformed behavior = new BehaviorPerformed
                 {
                     BPID = GenerateBPID(),
-                    BP_Date = DateTime.Now,
+                    BP_Date = date,
                     behaviorID = b.behaviorID,
                     studentID = s.StudentID
                 };
+                context.Set<BehaviorPerformed>().Add(behavior);
                 context.SaveChanges();
             }
 
