@@ -7,9 +7,9 @@
 
 <h1 class="text-center">Classroom: @Model.Classroom.classCode</h1>
 <p class="text-center">@Model.Classroom.semesterStart.Value.ToShortDateString() - @Model.Classroom.semesterEnd.Value.ToShortDateString()</p>
+<p class="text-center">@Html.ActionLink("Add a behavior type to the rubric", "AddType", "Behavior", new { classcode = Model.Classroom.classCode }, new { @style = "color:black" })</p>
 
-@if (Model.Students.Count > 0)
-{
+@if (Model.Students.Count > 0) {
     <table class="table table-striped table-hover">
         <thead class="thead-dark">
             <tr>
@@ -21,14 +21,13 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (Student s in Model.Students)
-            {
+            @foreach (Student s in Model.Students) {
                 <tr>
                     <td>@s.studentFirst</td>
                     <td>@s.studentUsername</td>
                     <td>@s.totalPoints</td>
                     <td>@ClassroomBinding.IsRequested(s.StudentID)</td>
-                    <td>@Html.ActionLink("Add Behavior", "Add", "Behavior", null, new { @style = "color:black" })</td>
+                    <td>@Html.ActionLink("Add Behavior", "Add", "Behavior", new { studentuserID = s.UserID, classcode = Model.Classroom.classCode }, new { @style = "color:black" })</td>
                 </tr>
             }
 
