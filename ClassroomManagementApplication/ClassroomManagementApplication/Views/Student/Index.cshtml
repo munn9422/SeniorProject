@@ -17,14 +17,27 @@
 </div>
 
 <div>
-    <p>Behvaior Log:</p>
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th class="text-center">Behavior Log</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (BehaviorPerformed b in UserBinding.PrintPerformed(student.StudentID))
+            {
+                <tr>
+                    <td>- @UserBinding.BPIDtoDescription(b.BPID)[i].behaviorDescription</td>
+                </tr>
+                i++;
+            }
 
-    @foreach (BehaviorPerformed b in UserBinding.PrintPerformed(student.StudentID))
-    {
-       <p>@UserBinding.BPIDtoDescription(b.BPID)[i].behaviorDescription</p>
-        i++;
-    }
-    <button>Request Prize</button>
+        </tbody>
+
+    </table>
+
+    
+    <button class="text-center btn btn-secondary"  >Request Prize</button>
 </div>
 
 
